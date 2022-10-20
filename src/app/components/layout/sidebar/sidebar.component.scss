@@ -1,0 +1,78 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 56px;
+  height: 100vh;
+  padding-top: 40px;
+
+  box-sizing: border-box;
+  backdrop-filter: blur(12px);
+  background: rgba(29, 29, 29, 0.5);
+  box-shadow: 0 40px 40px 8px rgba(0, 0, 0, 0.16);
+
+  &__logo {
+    display: block;
+    width: 100%;
+
+    margin-bottom: 64px;
+  }
+
+  &__navigation {
+    display: grid;
+    width: 100%;
+    grid-row-gap: 80px;
+    justify-content: center;
+  }
+
+  &__navigation-item {
+    position: relative;
+
+    display: block;
+    height: 40px;
+    width: 40px;
+
+    color: white;
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: -1;
+
+      display: block;
+      height: 100%;
+      width: 100%;
+
+      opacity: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translate(-50%, -50%) scale(0.5);
+
+      transition: 0.3s ease all;
+    }
+
+    svg {
+      display: block;
+      height: 100%;
+      width: 100%;
+
+      color: inherit;
+    }
+
+    &:hover {
+      &:before {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    &_active {
+      color: #45b9fb;
+      pointer-events: none;
+    }
+  }
+}
