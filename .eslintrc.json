@@ -1,0 +1,121 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ],
+        "@typescript-eslint/typedef": "error",
+        "@typescript-eslint/array-type": "off",
+        "@typescript-eslint/no-namespace": "error",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "none"
+          }
+        ],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "default",
+            "format": [
+              "camelCase",
+              "PascalCase",
+              "snake_case",
+              "UPPER_CASE"
+            ],
+            "leadingUnderscore": "allow",
+            "trailingUnderscore": "allow"
+          }
+        ],
+        "@typescript-eslint/no-inferrable-types": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/explicit-module-boundary-types": [
+          "error",
+          {
+            "allowArgumentsExplicitlyTypedAsAny": true
+          }
+        ],
+        "semi": "error",
+        "curly": "error",
+        "max-len": [
+          "error",
+          {
+            "code": 145,
+            "ignoreStrings": true
+          }
+        ],
+        "quotes": [
+          "error",
+          "single",
+          {
+            "allowTemplateLiterals": true
+          }
+        ],
+        "no-empty": "error",
+        "no-unused-vars": "off",
+        "no-fallthrough": "error",
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              "rxjs/Rx"
+            ]
+          }
+        ],
+        "space-before-function-paren": [
+          "error",
+          {
+            "named": "never",
+            "anonymous": "never",
+            "asyncArrow": "always"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {}
+    }
+  ]
+}
