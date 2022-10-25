@@ -1,0 +1,57 @@
+<div class="hero-slider">
+  <div class="hero-slider__wrapper">
+    <div
+      #slidersContainer
+      class="hero-slider__slides"
+      [ngStyle]="{'transform': 'translateX(-' + value + 'px)'}">
+      <div
+        #slide
+        *ngFor="let movie of data; let i = index"
+        [class.hero-slide_active]="i === config.activeSlide"
+        class="hero-slide">
+        <img
+          [alt]="'Image #' + i"
+          class="hero-slide__image"
+          [src]="movie.backdrop_path | getImageLink">
+        <div class="hero-slide__info">
+          <div
+            [ngStyle]="{ '--delay': '2s', '--reverse-delay': '0.2s' }"
+            class="hero-slide__badges fade-up-animation">
+            <span class="badge" *ngFor="let genre of movie.genres">{{genre.name}}</span>
+          </div>
+          <div
+            [ngStyle]="{ '--delay': '2s', '--reverse-delay': '0.2s' }"
+            class="hero-slide__rating fade-up-animation">
+            <div class="hero-slide__stars-group hero-slide__stars-group_primary">
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+            </div>
+            <div
+              [ngStyle]="{ '--rating': movie.vote_average }"
+              class="hero-slide__stars-group hero-slide__stars-group_secondary">
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+              <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+            </div>
+          </div>
+          <h1
+            [ngStyle]="{ '--delay': '2.1s', '--reverse-delay': '0.1s' }"
+            class="hero-slide__title fade-up-animation">{{movie.title}}</h1>
+          <p
+            [ngStyle]="{ '--delay': '2.1s', '--reverse-delay': '0.1s' }"
+            class="hero-slide__description fade-up-animation">{{movie.overview}}</p>
+          <a
+            [ngStyle]="{ '--delay': '2.2s', '--reverse-delay': '0s' }"
+            class="button hero-slide__button fade-up-animation"
+            [href]="['/movie/' + movie.id]"
+            [routerLink]="['/movie/' + movie.id]">Watch trailer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

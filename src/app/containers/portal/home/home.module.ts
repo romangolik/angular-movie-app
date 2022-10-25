@@ -1,14 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeRouting } from '@portal/home/home.routing';
-import { HomeComponent } from '@portal/home/home.component';
+import { HomeRouting } from './home.routing';
+
+import { HomeFacade } from '@portal/home/home.facade';
+import { MoviesService } from '@rest/movies/movies.service';
+import { GenresService } from '@rest/genres/genres.service';
+
+import { HeroSliderModule } from '@components/shared/hero-slider/hero-slider.module';
+
+import { HomeComponent } from './home.component';
 
 @NgModule({
   imports: [
+    HomeRouting,
     CommonModule,
-    HomeRouting
+    HeroSliderModule,
   ],
-  declarations: [ HomeComponent ]
+  declarations: [ HomeComponent ],
+  providers: [
+    HomeFacade,
+    MoviesService,
+    GenresService
+  ]
 })
 export class HomeModule { }

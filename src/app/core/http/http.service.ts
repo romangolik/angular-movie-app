@@ -35,11 +35,15 @@ export class HttpService extends HttpClient {
   getAll<T>(
     url: string,
     params?: Params,
-    DtoClass?: new (responseValue) => T
+    DtoClass?: new (responseValue) => T,
+    dataField?: string
   ): Observable<T[]> {
     return super.get<T[]>(url, { params: this.dataParser.parseParams(params) })
       .pipe(
-        map(response => DtoClass ? response.map(responseItem => new DtoClass(responseItem)) : response)
+        map(response => {
+          const data = dataField ? response[dataField] : response;
+          return DtoClass ? data.map(responseItem => new DtoClass(responseItem)) : response
+        })
       );
   }
 
