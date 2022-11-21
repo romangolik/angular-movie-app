@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { interval } from 'rxjs';
 
@@ -13,28 +13,16 @@ import { DEFAULT_CONFIG } from './_data/default.config';
   templateUrl: './hero-slider.component.html',
   styleUrls: ['./hero-slider.component.scss']
 })
-export class HeroSliderComponent {
+export class HeroSliderComponent implements OnInit {
   @Input() data: MovieDto[];
   @Input() config: IHeroSliderConfig = DEFAULT_CONFIG;
 
-  @ViewChild('slidersContainer') slidersContainer: ElementRef;
+  nextSlide = 1;
+  prevSlide: number;
 
-  @ViewChild('slide')
-  set slide(value: ElementRef) {
-    if (value && this.slidersContainer) {
-      this.width = value.nativeElement.offsetWidth;
-      this.initSlider();
-    }
+  ngOnInit(): void {
+    this.initSlider();
   }
-
-  @HostListener('window:resize')
-  onResize() {
-    this.width = window.innerWidth;
-    this.shiftSliders(0);
-  }
-
-  value = 0;
-  width: number;
 
   initSlider(): void {
     if (this.config.interval) {
@@ -45,6 +33,10 @@ export class HeroSliderComponent {
   shiftSliders(shiftIndex: number): void {
     this.config.activeSlide =
       this.config.activeSlide === this.data.length - 1 ? 0 : this.config.activeSlide + shiftIndex;
-    this.value = this.config.activeSlide * this.width;
+    
+    const nextSlideIndex = this.config.activeSlide + 1;
+    const prevSlideIndex = this.config.activeSlide - 1;
+    this.nextSlide = nextSlideIndex < this.data.length ? nextSlideIndex : 0;
+    this.prevSlide = prevSlideIndex < 0 ? this.data.length - 1 : prevSlideIndex;
   }
 }

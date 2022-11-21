@@ -1,13 +1,11 @@
 <div class="hero-slider">
   <div class="hero-slider__wrapper">
-    <div
-      #slidersContainer
-      class="hero-slider__slides"
-      [ngStyle]="{'transform': 'translateX(-' + value + 'px)'}">
+    <div class="hero-slider__slides">
       <div
-        #slide
         *ngFor="let movie of data; let i = index"
         [class.hero-slide_active]="i === config.activeSlide"
+        [class.hero-slide_next]="i === nextSlide"
+        [class.hero-slide_prev]="i === prevSlide"
         class="hero-slide">
         <img
           [alt]="'Image #' + i"
