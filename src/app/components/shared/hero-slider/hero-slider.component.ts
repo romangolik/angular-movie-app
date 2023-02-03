@@ -26,17 +26,22 @@ export class HeroSliderComponent implements OnInit {
 
   initSlider(): void {
     if (this.config.interval) {
-      interval(this.config.interval).subscribe(() => this.shiftSliders(1));
+      interval(this.config.interval).subscribe(() => this.shiftSliders());
     }
   }
 
-  shiftSliders(shiftIndex: number): void {
-    this.config.activeSlide =
-      this.config.activeSlide === this.data.length - 1 ? 0 : this.config.activeSlide + shiftIndex;
+  shiftSliders(): void {
+    const nextIndex = this.config.activeSlide + 1;
+
+    this.config.activeSlide = this.calculateValidIndex(nextIndex);
     
-    const nextSlideIndex = this.config.activeSlide + 1;
-    const prevSlideIndex = this.config.activeSlide - 1;
-    this.nextSlide = nextSlideIndex < this.data.length ? nextSlideIndex : 0;
-    this.prevSlide = prevSlideIndex < 0 ? this.data.length - 1 : prevSlideIndex;
+    this.nextSlide = this.calculateValidIndex(this.config.activeSlide + 1);
+    this.prevSlide = this.calculateValidIndex(this.config.activeSlide - 1);
+  }
+
+  calculateValidIndex(value: number): number {
+    const arrayLength = this.data.length;
+
+    return (value + arrayLength) % arrayLength;
   }
 }
