@@ -91,6 +91,17 @@
     margin-bottom: 16px;
 
     color: #FFFFFF;
+
+    a {
+      font: inherit;
+      line-height: inherit;
+
+      color: inherit;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   &__description {
@@ -104,6 +115,6 @@
   &__animation-element {
     will-change: transform, opacity;
 
-    animation: 1s cubic-bezier(.7,-.4,.4,1.4) fadeUpAnimation var(--delay, 0s) both;
+    animation: 1s cubic-bezier(.7,-.4,.4,1.4) fadeUp var(--delay, 0s) both;
   }
 }
