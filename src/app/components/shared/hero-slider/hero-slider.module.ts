@@ -2,18 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
-import { GetImageLinkPipe } from '@core/pipes/get-image-link.pipe';
+
+import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
+
 import { HeroSliderComponent } from './hero-slider.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    GetImageLinkModule
   ],
-  declarations: [
-    GetImageLinkPipe,
-    HeroSliderComponent
-  ],
+  declarations: [ HeroSliderComponent ],
   exports: [ HeroSliderComponent ]
 })
 export class HeroSliderModule { }

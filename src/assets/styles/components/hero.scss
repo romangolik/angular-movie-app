@@ -54,10 +54,10 @@
   }
 
   &__rating {
-    position: relative;
-
     width: max-content;
     margin-bottom: 16px;
+
+    color: #0FEFFD;
 
     svg {
       display: block;
@@ -68,23 +68,12 @@
     }
   }
 
-  &__stars-group {
+  &__rating-inner {
     display: flex;
+    width: calc((var(--rating) / 10) * 100%);
 
-    &_primary {
-      color: white;
-    }
-
-    &_secondary {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      width: calc((var(--rating) / 10) * 100%);
-
-      color: #0FEFFD;
-      overflow: hidden;
-    }
+    
+    overflow: hidden;
   }
 
   &__title {

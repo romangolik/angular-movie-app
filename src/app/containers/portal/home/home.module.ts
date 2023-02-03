@@ -8,6 +8,7 @@ import { MoviesService } from '@rest/movies/movies.service';
 import { GenresService } from '@rest/genres/genres.service';
 
 import { HeroSliderModule } from '@components/shared/hero-slider/hero-slider.module';
+import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
 import { HomeComponent } from './home.component';
 
@@ -16,6 +17,7 @@ import { HomeComponent } from './home.component';
     HomeRouting,
     CommonModule,
     HeroSliderModule,
+    GetImageLinkModule
   ],
   declarations: [ HomeComponent ],
   providers: [

@@ -30,8 +30,7 @@ export class HomeFacade {
                 ...movie,
                 genres: this.getMovieGenres(movie.genre_ids, genres)
               }))
-            ),
-            map(movies => [movies[0], movies[1], movies[2], movies[3], movies[4]])
+            )
           )
       ),
 

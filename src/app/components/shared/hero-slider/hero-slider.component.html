@@ -17,18 +17,9 @@
           <span class="badge reduced-text" *ngFor="let genre of movie.genres">{{genre.name}}</span>
         </div>
         <div
-          [ngStyle]="{ '--delay': '1s' }"
+          [ngStyle]="{ '--delay': '1s', '--rating': movie.vote_average }"
           class="hero__rating hero__animation-element">
-          <div class="hero__stars-group hero__stars-group_primary">
-            <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-            <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-            <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-            <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-            <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-          </div>
-          <div
-            [ngStyle]="{ '--rating': movie.vote_average }"
-            class="hero__stars-group hero__stars-group_secondary">
+          <div class="hero__rating-inner">
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
