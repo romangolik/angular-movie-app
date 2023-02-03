@@ -1,0 +1,47 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: 56px;
+  line-height: 1.14;
+}
+
+*:not(h1, h2, h3, h4, h5, h6) {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.reduced-text {
+  font-size: 14px;
+}
+
+.increased-text {
+  font-size: 18px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.light-weight {
+  font-weight: 300;
+}
+
+.regular-weight {
+  font-weight: 400;
+}
+
+.medium-weight {
+  font-weight: 500;
+}
+
+.bold-weight {
+  font-weight: 700;
+}

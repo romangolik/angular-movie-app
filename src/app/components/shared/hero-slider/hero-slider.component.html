@@ -5,21 +5,21 @@
       [class.hero-slide_active]="i === config.activeSlide"
       [class.hero-slide_next]="i === nextSlide"
       [class.hero-slide_prev]="i === prevSlide"
-      class="hero-slide">
+      class="hero hero-slide">
       <img
         [alt]="'Image #' + i"
-        class="hero-slide__image"
+        class="hero__image"
         [src]="movie.backdrop_path | getImageLink">
-      <div class="hero-slide__info">
+      <div class="hero__info">
         <div
           [ngStyle]="{ '--delay': '1s' }"
-          class="hero-slide__badges fade-up-animation">
-          <span class="badge" *ngFor="let genre of movie.genres">{{genre.name}}</span>
+          class="hero__badges hero__animation-element">
+          <span class="badge reduced-text" *ngFor="let genre of movie.genres">{{genre.name}}</span>
         </div>
         <div
           [ngStyle]="{ '--delay': '1s' }"
-          class="hero-slide__rating fade-up-animation">
-          <div class="hero-slide__stars-group hero-slide__stars-group_primary">
+          class="hero__rating hero__animation-element">
+          <div class="hero__stars-group hero__stars-group_primary">
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
@@ -28,7 +28,7 @@
           </div>
           <div
             [ngStyle]="{ '--rating': movie.vote_average }"
-            class="hero-slide__stars-group hero-slide__stars-group_secondary">
+            class="hero__stars-group hero__stars-group_secondary">
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
@@ -38,13 +38,13 @@
         </div>
         <h1
           [ngStyle]="{ '--delay': '1.1s' }"
-          class="hero-slide__title fade-up-animation">{{movie.title}}</h1>
+          class="hero__title hero__animation-element">{{movie.title}}</h1>
         <p
           [ngStyle]="{ '--delay': '1.1s' }"
-          class="hero-slide__description fade-up-animation">{{movie.overview}}</p>
+          class="hero__description hero__animation-element">{{movie.overview}}</p>
         <a
           [ngStyle]="{ '--delay': '1.2s' }"
-          class="button hero-slide__button fade-up-animation"
+          class="button hero__button hero__animation-element"
           [href]="['/movie/' + movie.id]"
           [routerLink]="['/movie/' + movie.id]">Watch trailer</a>
       </div>
