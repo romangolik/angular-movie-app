@@ -1,47 +1,98 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Input,
+  OnInit,
+  OnDestroy,
+  Component,
+  HostListener,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 
-import { interval } from 'rxjs';
+import {
+  never,
+  Subject,
+  interval,
+  switchMap,
+  takeUntil,
+  BehaviorSubject,
+} from 'rxjs';
 
 import { MovieDto } from '@rest/movies/_types/movie.dto';
-
-import { IHeroSliderConfig } from './_types/hero-slider-config.interface';
-
-import { DEFAULT_CONFIG } from './_data/default.config';
 
 @Component({
   selector: 'app-hero-slider',
   templateUrl: './hero-slider.component.html',
-  styleUrls: ['./hero-slider.component.scss']
+  styleUrls: ['./hero-slider.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeroSliderComponent implements OnInit {
-  @Input() data: MovieDto[];
-  @Input() config: IHeroSliderConfig = DEFAULT_CONFIG;
+export class HeroSliderComponent implements OnInit, OnDestroy {
+  @HostListener('document:visibilitychange')
+  onKeyUp(): void {
+    this.playing.next(!document.hidden);
+  }
 
-  nextSlide = 1;
+  @Input() 
+  set data(value: MovieDto[]) {
+    if (value && value.length) {
+      this._data = value;
+      this.setIndexes(this.activeSlide);
+    }
+  }
+  get data(): MovieDto[] {
+    return this._data;
+  }
+  @Input() interval = 5000;
+
+  private _data: MovieDto[];
+  private destroy$ = new Subject<void>();
+  private playing = new BehaviorSubject(true);
+
+  activeSlide = 0;
+  nextSlide: number;
   prevSlide: number;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.initSlider();
   }
 
   initSlider(): void {
-    if (this.config.interval) {
-      interval(this.config.interval).subscribe(() => this.shiftSliders());
+    if (this.interval) {
+      this.playing
+        .pipe(
+          switchMap((status) =>
+            status ? interval(this.interval).pipe(takeUntil(this.destroy$)) : never()
+          ),
+          takeUntil(this.destroy$)
+        )
+        .subscribe(() => this.changeSlide());
     }
   }
 
-  shiftSliders(): void {
-    const nextIndex = this.config.activeSlide + 1;
+  changeSlide(): void {
+    const nextIndex = this.activeSlide + 1;
 
-    this.config.activeSlide = this.calculateValidIndex(nextIndex);
-    
-    this.nextSlide = this.calculateValidIndex(this.config.activeSlide + 1);
-    this.prevSlide = this.calculateValidIndex(this.config.activeSlide - 1);
+    this.setIndexes(nextIndex);
   }
 
-  calculateValidIndex(value: number): number {
+  setIndexes(activeIndex: number): void {
+    this.activeSlide = this.calculateIndex(activeIndex);
+
+    this.nextSlide = this.calculateIndex(this.activeSlide + 1);
+    this.prevSlide = this.calculateIndex(this.activeSlide - 1);
+
+    this.cdr.markForCheck();
+  }
+
+  calculateIndex(value: number): number {
     const arrayLength = this.data.length;
 
     return (value + arrayLength) % arrayLength;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

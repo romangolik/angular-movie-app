@@ -2,7 +2,7 @@
   <div class="hero-slider__slides">
     <div
       *ngFor="let movie of data; let i = index"
-      [class.hero-slide_active]="i === config.activeSlide"
+      [class.hero-slide_active]="i === activeSlide"
       [class.hero-slide_next]="i === nextSlide"
       [class.hero-slide_prev]="i === prevSlide"
       class="hero hero-slide">
@@ -19,13 +19,14 @@
         <div
           [ngStyle]="{ '--delay': '1s', '--rating': movie.vote_average }"
           class="hero__rating hero__animation-element">
-          <div class="hero__rating-inner">
+          <div class="hero__stars">
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
             <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
           </div>
+          <p class="hero__reviews reduced-text">{{movie.vote_count}} Reviews</p>
         </div>
         <h1
           [ngStyle]="{ '--delay': '1.1s' }"

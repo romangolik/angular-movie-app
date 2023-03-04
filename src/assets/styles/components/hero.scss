@@ -22,13 +22,13 @@
     height: 100%;
     width: 100%;
 
-    background-image: linear-gradient(90deg, black 0%, black 35%, transparent 100%);
+    background-image: linear-gradient(90deg, black 0%, transparent 130%);
   }
 
   &__image {
     position: absolute;
     top: 0;
-    left: 22%;
+    left: 0;
 
     display: block;
     width: 100%;
@@ -54,26 +54,32 @@
   }
 
   &__rating {
-    width: max-content;
+    display: flex;
+    gap: 15px;
     margin-bottom: 16px;
+    align-items: center;
+  }
+
+  &__stars {
+    --star-size: 16px;
+
+    display: flex;
+    width: calc((var(--rating) / 10) * (var(--star-size) * 5));
 
     color: #0FEFFD;
+    overflow: hidden;
 
     svg {
       display: block;
-      height: 16px;
-      width: 16px;
+      width: var(--star-size);
+      height: var(--star-size);
 
       flex: none;
     }
   }
 
-  &__rating-inner {
-    display: flex;
-    width: calc((var(--rating) / 10) * 100%);
-
-    
-    overflow: hidden;
+  &__reviews {
+    color: #999999;
   }
 
   &__title {

@@ -11,11 +11,15 @@ import { MovieDto } from '@rest/movies/_types/movie.dto';
 })
 export class HomeComponent implements OnInit {
   movies: MovieDto[];
+  sliderMovies: MovieDto[];
 
   constructor(private facade: HomeFacade) { }
 
   ngOnInit(): void {
     this.facade.getPopular()
-      .subscribe(data => this.movies = data);
+      .subscribe(data => {
+        this.movies = data;
+        this.sliderMovies = data.slice(0, 5);
+      });
   }
 }
