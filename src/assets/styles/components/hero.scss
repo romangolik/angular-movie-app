@@ -1,3 +1,4 @@
+@import "src/assets/styles/components/rating.scss";
 @import "src/assets/styles/abstracts/mixins/text-overflow.mixin";
 
 .hero {
@@ -54,28 +55,7 @@
   }
 
   &__rating {
-    display: flex;
-    gap: 15px;
     margin-bottom: 16px;
-    align-items: center;
-  }
-
-  &__stars {
-    --star-size: 16px;
-
-    display: flex;
-    width: calc((var(--rating) / 10) * (var(--star-size) * 5));
-
-    color: #0FEFFD;
-    overflow: hidden;
-
-    svg {
-      display: block;
-      width: var(--star-size);
-      height: var(--star-size);
-
-      flex: none;
-    }
   }
 
   &__reviews {

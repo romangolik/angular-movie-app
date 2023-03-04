@@ -11,36 +11,11 @@
         <span class="link__text">New releases</span>  
         <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
       </a>
-      <div class="list">
+      <div class="list movies__list" *ngIf="movies.length !== 0">
         <div 
           *ngFor="let movie of movies"
-          class="card">
-          <img  
-            class="card__image"
-            [alt]="movie.title"
-            [src]="movie.poster_path | getImageLink:'w342'">
-          <div class="card__content">
-            <span class="badge reduced-text">{{movie.genres[0].name}}</span>
-            <div 
-              [ngStyle]="{ '--rating': movie.vote_average }"
-              class="card__rating">
-              <div class="card__rating-inner">
-                <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-                <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-                <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-                <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-                <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-              </div>
-            </div>
-            <h4 class="card__title">{{movie.title}}</h4>
-          </div>
-          <a 
-            class="link card__link"
-            [href]="['./movie']"
-            [routerLink]="['./movie' + movie.id]">
-            <span class="link__text">Watch now</span>  
-            <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
-          </a>
+          class="list__item movies__list-item">
+          <app-movie-card [data]="movie"></app-movie-card>
         </div>
       </div>
     </section>
@@ -52,6 +27,15 @@
         <span class="link__text">Featured TV shows</span>  
         <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
       </a>
+      <div class="list tv-shows__list" *ngIf="movies.length !== 0">
+        <div 
+          *ngFor="let movie of movies"
+          class="list__item tv-shows__list-item">
+          <app-movie-card 
+            [data]="movie" 
+            [mode]="movieCardModesEnum.Large"></app-movie-card>
+        </div>
+      </div>
     </section>
   </main>
 </div>
