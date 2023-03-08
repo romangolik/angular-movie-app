@@ -1,35 +1,40 @@
 <div 
   class="movie-card"
+  [class.loaded]="isImageLoaded"
   [class.movie-card_large]="mode === movieCardModesEnum.Large"
   [class.movie-card_normal]="mode === movieCardModesEnum.Normal">
   <img
     class="movie-card__image"
+    loading="lazy"
     [alt]="data.title"
     [src]="data.poster_path | getImageLink : 'w500'"
+    (load)="imageLoaded()"
   />
   <div class="movie-card__content">
-    <span class="badge reduced-text">{{ data.genres[0].name }}</span>
-    <div 
-      [ngStyle]="{ '--rating': data.vote_average }" 
-      class="rating movie-card__rating">
-      <div class="rating__stars">
-        <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-        <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-        <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-        <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
-        <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+    <div class="movie-card__info">
+      <span class="badge reduced-text">{{ data.genres[0].name }}</span>
+      <div 
+        [ngStyle]="{ '--rating': data.vote_average }" 
+        class="rating movie-card__rating">
+        <div class="rating__stars">
+          <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+          <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+          <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+          <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+          <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
+        </div>
       </div>
+      <h4 class="movie-card__title">{{ data.title }}</h4>
     </div>
-    <h4 class="movie-card__title">{{ data.title }}</h4>
+    <a
+      class="link movie-card__link"
+      [href]="['./movie']"
+      [routerLink]="['./movie' + data.id]"
+    >
+      <span class="link__text">Watch now</span>
+      <svg class="link__icon">
+        <use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use>
+      </svg>
+    </a>
   </div>
-  <a
-    class="link movie-card__link"
-    [href]="['./movie']"
-    [routerLink]="['./movie' + data.id]"
-  >
-    <span class="link__text">Watch now</span>
-    <svg class="link__icon">
-      <use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use>
-    </svg>
-  </a>
 </div>

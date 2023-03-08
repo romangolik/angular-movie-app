@@ -14,5 +14,10 @@ export class MovieCardComponent {
   @Input() data: MovieDto;
   @Input() mode: MovieCardModesEnum = MovieCardModesEnum.Normal;
 
+  isImageLoaded = false;
   movieCardModesEnum = MovieCardModesEnum;
+
+  imageLoaded(): void {
+    this.isImageLoaded = true;
+  }
 }
