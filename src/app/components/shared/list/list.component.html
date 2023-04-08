@@ -1,0 +1,20 @@
+<div class="list">
+  <button 
+    class="list__button list__button_prev"
+    [hidden]="isPrevButtonHidden"
+    (click)="prevItems()">
+    <svg class="list__button-icon"><use xlink:href="assets/icons/sprite.svg#left-arrow-icon"></use></svg>
+  </button>
+  <ul 
+    #list
+    [ngStyle]="gap ? {'grid-gap.px': gap} : {}"
+    class="list__content">
+    <ng-content select="app-list-item"></ng-content>
+  </ul>
+  <button 
+    class="list__button list__button_next"
+    [hidden]="isNextButtonHidden"
+    (click)="nextItems()">
+    <svg class="list__button-icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+  </button>
+</div>

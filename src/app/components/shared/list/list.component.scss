@@ -1,0 +1,70 @@
+.list-contaier {
+  position: relative;
+}
+
+.list {
+  --scroll-padding: 50px;
+
+  position: relative;
+
+  &__content {
+    display: grid;
+    grid-auto-flow: column;
+
+    overflow-x: hidden;
+    scroll-padding: var(--scroll-padding);
+    scroll-snap-type: x mandatory;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    & > app-list-item, .preloader-card {
+      scroll-snap-align: start;
+
+      &:first-child {
+        margin-left: var(--scroll-padding);
+      }
+
+      &:last-child {
+        margin-right: var(--scroll-padding);
+      }
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+
+    display: flex;
+    width: 50px;  
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    outline: none;
+    background-color: rgba(0,0,0,.5);
+
+    &:hover {
+      background-color: rgba(0,0,0,.75);
+    }
+
+    &_next {
+      right: 0;
+    }
+
+    &_prev {
+      left: 0;
+    }
+  }
+
+  &__button-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+
+    color: white;
+  }
+}

@@ -16,22 +16,13 @@
   }
 
   &__link {
-    margin-left: 52px;
+    margin-left: 50px;
     margin-bottom: 24px;
   }
 }
 
 .movies {
   margin-bottom: 40px;
-
-  &__link {
-    margin-left: 52px;
-    margin-bottom: 24px;
-  }
-
-  &__list {
-    gap: 16px;
-  }
 
   &__list-item {
     width: 292px;
@@ -40,28 +31,14 @@
 }
 
 .tv-shows {
-  &__list {
-
-  }
-
   &__list-item {
-    width: 504px;
-    height: 736px;
+    width: 292px;
+    height: 440px;
   }
 }
 
-.list {
-  display: flex;
-  padding-left: 56px;
-  margin-left: -56px;
-
-  overflow-x: auto;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &__item {
-    flex: none;
-  }
+.preloader-card {
+  width: 292px;
+  height: 440px;
+  background-color: #202124;
 }

@@ -4,9 +4,6 @@ import { HomeFacade } from '@portal/home/home.facade';
 
 import { MovieDto } from '@rest/movies/_types/movie.dto';
 
-
-import { MovieCardModesEnum } from '@components/shared/movie-card/_data/movie-cards-mode.enum';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,8 +12,6 @@ import { MovieCardModesEnum } from '@components/shared/movie-card/_data/movie-ca
 export class HomeComponent implements OnInit {
   movies: MovieDto[];
   sliderMovies: MovieDto[];
-
-  movieCardModesEnum = MovieCardModesEnum;
 
   constructor(private facade: HomeFacade) { }
 

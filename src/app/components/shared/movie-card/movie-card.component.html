@@ -1,15 +1,18 @@
 <div 
   class="movie-card"
-  [class.loaded]="isImageLoaded"
-  [class.movie-card_large]="mode === movieCardModesEnum.Large"
-  [class.movie-card_normal]="mode === movieCardModesEnum.Normal">
-  <img
-    class="movie-card__image"
-    loading="lazy"
-    [alt]="data.title"
-    [src]="data.poster_path | getImageLink : 'w500'"
-    (load)="imageLoaded()"
+  [class.loaded]="isImageLoaded">
+  <a
+    class="link movie-card__image"
+    [href]="['./movie/']"
+    [routerLink]="['./movie/' + data.id]">
+    <img
+      class="movie-card__image-picture"
+      loading="lazy"
+      [alt]="data.title"
+      [src]="data.poster_path | getImageLink : 'w780'"
+      (load)="imageLoaded()"
   />
+  </a>
   <div class="movie-card__content">
     <div class="movie-card__info">
       <span class="badge reduced-text">{{ data.genres[0].name }}</span>
@@ -28,8 +31,8 @@
     </div>
     <a
       class="link movie-card__link"
-      [href]="['./movie']"
-      [routerLink]="['./movie' + data.id]"
+      [href]="['./movie/']"
+      [routerLink]="['./movie/' + data.id]"
     >
       <span class="link__text">Watch now</span>
       <svg class="link__icon">

@@ -11,12 +11,16 @@
         <span class="link__text">New releases</span>  
         <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
       </a>
-      <div class="list movies__list" *ngIf="movies.length !== 0">
-        <div 
-          *ngFor="let movie of movies"
-          class="list__item movies__list-item">
-          <app-movie-card [data]="movie"></app-movie-card>
-        </div>
+      <div class="movies__content">
+        <app-list 
+          [gap]="16" 
+          class="movies__list">
+          <app-list-item 
+            *ngFor="let movie of movies"
+            class="movies__list-item">
+            <app-movie-card [data]="movie"></app-movie-card>
+          </app-list-item>
+        </app-list>
       </div>
     </section>
     <section class="tv-shows">
@@ -27,15 +31,13 @@
         <span class="link__text">Featured TV shows</span>  
         <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
       </a>
-      <div class="list tv-shows__list" *ngIf="movies.length !== 0">
-        <div 
+      <app-list [gap]="16" class="tv-shows__list">
+        <app-list-item 
           *ngFor="let movie of movies"
-          class="list__item tv-shows__list-item">
-          <app-movie-card 
-            [data]="movie" 
-            [mode]="movieCardModesEnum.Large"></app-movie-card>
-        </div>
-      </div>
+          class="tv-shows__list-item">
+          <app-movie-card [data]="movie"></app-movie-card>
+        </app-list-item>
+      </app-list>
     </section>
   </main>
 </div>
