@@ -9,10 +9,10 @@
   &__content {
     position: relative;
     padding-top: 24px;
-    padding-left: 56px;
+    padding-left: var(--sidebar-width);
 
     box-sizing: border-box;
-    background-color: #1D1D1D;
+    background-color: var(--darker-gray);
   }
 
   &__link {
@@ -35,10 +35,4 @@
     width: 292px;
     height: 440px;
   }
-}
-
-.preloader-card {
-  width: 292px;
-  height: 440px;
-  background-color: #202124;
 }

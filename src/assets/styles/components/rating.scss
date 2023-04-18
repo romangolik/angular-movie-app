@@ -9,7 +9,7 @@
     display: flex;
     width: calc((var(--rating) / 10) * (var(--star-size) * 5));
 
-    color: #0FEFFD;
+    color: var(--teal);
     overflow: hidden;
 
     svg {

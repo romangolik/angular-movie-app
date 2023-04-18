@@ -1,4 +1,4 @@
-* {
+body {
   font-family: 'Roboto', sans-serif;
 }
 
@@ -6,6 +6,12 @@ h1 {
   font-weight: 500;
   font-size: 56px;
   line-height: 1.14;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.25;
 }
 
 h4 {
@@ -34,20 +40,4 @@ h4 {
 
 .large-text {
   font-size: 24px;
-}
-
-.light-weight {
-  font-weight: 300;
-}
-
-.regular-weight {
-  font-weight: 400;
-}
-
-.medium-weight {
-  font-weight: 500;
-}
-
-.bold-weight {
-  font-weight: 700;
 }

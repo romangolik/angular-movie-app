@@ -1,13 +1,13 @@
 .badge {
   display: inline-block;
-  padding: 4px 8px;
   width: max-content;
+  padding: 4px 8px;
 
-  color: #0FEFFD;
+  color: var(--teal);
 
   flex: none;
+  box-sizing: border-box;
   white-space: nowrap;
   border-radius: 0 8px;
-  box-sizing: border-box;
-  background: rgba(29, 29, 29, 0.5);
+  background-color: var(--glass-background);
 }

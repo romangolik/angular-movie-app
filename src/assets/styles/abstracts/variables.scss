@@ -1,12 +1,18 @@
 :root {
-  --white: #FFFFFF;
-  --blue: #6CD3FF;
-  --purple: #8C72FF;
-  --dark-purple: #785EEB;
-  --grey: #A7A4AF;
-  --light-grey: #E2E1E4;
-  --dark-blue: #291c52;
+  --sidebar-width: 56px;
 
-  --base-color: #EBE6FA;
-  --base-color-2: #FBFAFF;
+  --white: #FFFFFF;
+  --black: #000000;
+  --teal: #0FEFFD;
+  --gray: #999999;
+  --dark-gray: #202124;
+  --darker-gray: #1D1D1D;
+
+  --glass-blur: blur(12px);
+  --glass-shadow: 0px 40px 40px 8px rgba(0, 0, 0, 0.16);
+  --glass-background: rgba(29, 29, 29, 0.5);
+
+  --primary-font-family: 'Roboto'; //400, 500
+
+  //14px-smaler, main-16px, button-18px, card-header-24px, card-link-18px
 }

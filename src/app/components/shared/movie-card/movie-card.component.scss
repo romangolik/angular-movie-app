@@ -9,7 +9,7 @@
 
   flex: none;
   overflow: hidden;
-  background-color: #202124;
+  background-color: var(--dark-gray);
 
   &:before {
     content: '';
@@ -73,7 +73,7 @@
   &__title {
     font-size: 24px;
 
-    color: #FFFFFF;
+    color: var(--white);
 
     @include text-overflow();
   }

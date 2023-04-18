@@ -1,7 +1,3 @@
-:root {
-  --sidebar-width: 56px;
-}
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -13,9 +9,9 @@
   padding-top: 40px;
 
   box-sizing: border-box;
-  backdrop-filter: blur(12px);
-  background: rgba(29, 29, 29, 0.5);
-  box-shadow: 0 40px 40px 8px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  background-color: var(--glass-background);
 
   &__logo {
     display: block;
@@ -38,7 +34,7 @@
     height: 40px;
     width: 40px;
 
-    color: white;
+    color: var(--white);
 
     &:before {
       content: '';
@@ -52,12 +48,15 @@
       height: 100%;
       width: 100%;
 
+      scale: 0.5;
       opacity: 0;
+      translate: -50% -50%;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      transform: translate(-50%, -50%) scale(0.5);
+      background-color: rgba(255, 255, 255, 0.1);
 
       transition: 0.3s ease all;
+
+      will-change: opacity, translate;
     }
 
     svg {
@@ -70,13 +69,13 @@
 
     &:hover {
       &:before {
+        scale: 1;
         opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
       }
     }
 
     &_active {
-      color: #45b9fb;
+      color: var(--teal);
       pointer-events: none;
     }
   }

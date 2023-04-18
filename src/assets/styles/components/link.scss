@@ -1,13 +1,13 @@
 .link {
   display: inline-flex;
 
-  color: #FFFFFF;
+  color: var(--white);
   align-items: center;
 
   transition: 0.4s ease all;
 
   &:hover {
-    color: #0feffd;
+    color: var(--teal);
   }
 
   &__text {

@@ -23,7 +23,7 @@
     height: 100%;
     width: 100%;
 
-    background-image: linear-gradient(90deg, black 0%, transparent 130%);
+    background-image: linear-gradient(90deg, var(--black) 0%, transparent 130%);
   }
 
   &__image {
@@ -45,7 +45,7 @@
     width: 100%;
     max-width: 600px;
 
-    color: white;
+    color: var(--white);
   }
 
   &__badges {
@@ -59,13 +59,13 @@
   }
 
   &__reviews {
-    color: #999999;
+    color: var(--gray);
   }
 
   &__title {
     margin-bottom: 16px;
 
-    color: #FFFFFF;
+    color: var(--white);
 
     a {
       font: inherit;
@@ -82,7 +82,7 @@
   &__description {
     margin-bottom: 16px;
 
-    color: #FFFFFF;
+    color: var(--white);
 
     @include text-overflow(3);
   }
