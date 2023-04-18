@@ -1,0 +1,8 @@
+.footer {
+  --footer-padding: 50px;
+
+  padding: var(--footer-padding);
+  padding-left: calc(var(--sidebar-width) + var(--footer-padding));
+
+  color: var(--gray);
+}

@@ -72,8 +72,8 @@
     <symbol viewBox="0 0 24 24" fill="none" id="right-arrow-icon">
       <path d="M12.8233 10.7627L9.06063 7L9.41397 6.64666L14.0603 11.293L9.41397 15.9393L9.06063 15.586L12.8233 11.8233L13.3536 11.293L12.8233 10.7627Z" stroke="currentColor" stroke-width="1.5"/>
     </symbol>
-    <svg viewBox="0 0 24 24" fill="none" id="left-arrow-icon">
+    <symbol viewBox="0 0 24 24" fill="none" id="left-arrow-icon">
       <path d="M11.1767 13.2373L14.9394 17L14.586 17.3533L9.93969 12.707L14.586 8.06066L14.9394 8.414L11.1767 12.1767L10.6464 12.707L11.1767 13.2373Z" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
+    </symbol>
   </defs>
 </svg>
