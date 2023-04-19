@@ -1,8 +1,4 @@
-.list-contaier {
-  position: relative;
-}
-
-.list {
+.carousel {
   --scroll-padding: 50px;
 
   position: relative;
@@ -19,7 +15,7 @@
       display: none;
     }
 
-    & > app-list-item, .preloader-card {
+    & > app-carousel-item {
       scroll-snap-align: start;
 
       &:first-child {

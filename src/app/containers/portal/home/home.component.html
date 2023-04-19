@@ -3,41 +3,43 @@
     <app-hero-slider [data]="sliderMovies"></app-hero-slider>
   </header>
   <section class="home__content">
-    <section class="movies">
-      <a 
-        class="link home__link"
-        [href]="['./movie']"
-        [routerLink]="['./movie']">
-        <span class="link__text">Trending Movies</span>  
-        <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
-      </a>
-      <div class="movies__content">
-        <app-list 
-          [gap]="16" 
-          class="movies__list">
-          <app-list-item 
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./movie']"
+          [routerLink]="['./movie']">
+          <span class="link__text">Trending Movies</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <div class="listing__content">
+        <app-carousel [gap]="16">
+          <app-carousel-item 
             *ngFor="let movie of movies"
-            class="movies__list-item">
+            class="listing__carousel-item">
             <app-media-card [data]="movie"></app-media-card>
-          </app-list-item>
-        </app-list>
+          </app-carousel-item>
+        </app-carousel>
       </div>
     </section>
-    <section class="tv-shows">
-      <a 
-        class="link home__link"
-        [href]="['./tv-shows']"
-        [routerLink]="['./tv-shows']">
-        <span class="link__text">Trending TV Shows</span>  
-        <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
-      </a>
-      <app-list [gap]="16" class="tv-shows__list">
-        <app-list-item 
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./tv-shows']"
+          [routerLink]="['./tv-shows']">
+          <span class="link__text">Trending TV Shows</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <app-carousel [gap]="16">
+        <app-carousel-item 
           *ngFor="let tvShow of tvShows"
-          class="tv-shows__list-item">
+          class="listing__carousel-item">
           <app-media-card [data]="tvShow"></app-media-card>
-        </app-list-item>
-      </app-list>
+        </app-carousel-item>
+      </app-carousel>
     </section>
   </section>
 </div>

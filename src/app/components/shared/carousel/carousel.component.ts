@@ -5,32 +5,33 @@ import {
   QueryList,
   ElementRef,
   OnDestroy,
+  AfterViewInit,
   ContentChildren,
   AfterContentInit,
   ViewEncapsulation,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
-  AfterViewInit,
 } from '@angular/core';
 
-import { ListItemComponent } from './list-item/list-item.component';
 import { take } from 'rxjs';
 
+import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-carousel',
+  templateUrl: './carousel.component.html',
+  styleUrls: ['./carousel.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListComponent implements AfterContentInit, AfterViewInit, OnDestroy {
-  @ViewChild('list') list: ElementRef;
-  @ContentChildren(ListItemComponent, { read: ElementRef }) listItems: QueryList<ElementRef>;
+export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+  @ViewChild('carousel') carousel: ElementRef;
+  @ContentChildren(CarouselItemComponent, { read: ElementRef }) carouselItems: QueryList<ElementRef>;
 
   @Input() gap: number;
 
-  listItem: ElementRef;
-  listSyles: CSSStyleDeclaration;
+  carouselItem: ElementRef;
+  carouselSyles: CSSStyleDeclaration;
   isPrevButtonHidden = true;
   isNextButtonHidden = false;
   intersectionObserver: IntersectionObserver;
@@ -38,21 +39,21 @@ export class ListComponent implements AfterContentInit, AfterViewInit, OnDestroy
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngAfterContentInit(): void {
-    this.listItems.changes
+    this.carouselItems.changes
       .pipe(take(1))
       .subscribe(queryList => {
-        this.listItem = queryList.first;
+        this.carouselItem = queryList.first;
         setTimeout(() => this.initIntersectionObserver(queryList.toArray()), 1000);
       });
   }
 
   ngAfterViewInit(): void {
-    this.listSyles = getComputedStyle(this.list.nativeElement);
+    this.carouselSyles = getComputedStyle(this.carousel.nativeElement);
   }
 
   initIntersectionObserver(targets: ElementRef[]): void {
     const options = {
-      root: this.list.nativeElement,
+      root: this.carousel.nativeElement,
       rootMargin: '0px',
       threshold: 1.0,
     };
@@ -77,9 +78,9 @@ export class ListComponent implements AfterContentInit, AfterViewInit, OnDestroy
   }
 
   calculateOffsetWidth(): number {
-    const listWidth = this.list.nativeElement.clientWidth;
-    const scrollPadding = +this.listSyles.getPropertyValue('--scroll-padding').replace('px', '');
-    const listItemWidth = this.listItem.nativeElement.clientWidth;
+    const listWidth = this.carousel.nativeElement.clientWidth;
+    const scrollPadding = +this.carouselSyles.getPropertyValue('--scroll-padding').replace('px', '');
+    const listItemWidth = this.carouselItem.nativeElement.clientWidth;
 
     const maximalOffsetWidth = listWidth - listItemWidth - this.gap - scrollPadding;
 
@@ -100,7 +101,7 @@ export class ListComponent implements AfterContentInit, AfterViewInit, OnDestroy
   }
 
   prevItems(): void {
-    const listElement = this.list.nativeElement;
+    const listElement = this.carousel.nativeElement;
 
     listElement.scrollTo({
       left: listElement.scrollLeft - this.calculateOffsetWidth(),
@@ -109,7 +110,7 @@ export class ListComponent implements AfterContentInit, AfterViewInit, OnDestroy
   }
 
   nextItems(): void {
-    const listElement = this.list.nativeElement;
+    const listElement = this.carousel.nativeElement;
 
     listElement.scrollTo({
       left: listElement.scrollLeft + this.calculateOffsetWidth(),

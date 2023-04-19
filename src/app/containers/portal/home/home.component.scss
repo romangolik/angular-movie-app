@@ -8,31 +8,10 @@
 
   &__content {
     position: relative;
-    padding-top: 24px;
+    padding-top: 1px;
     padding-left: var(--sidebar-width);
 
     box-sizing: border-box;
     background-color: var(--darker-gray);
-  }
-
-  &__link {
-    margin-left: 50px;
-    margin-bottom: 24px;
-  }
-}
-
-.movies {
-  margin-bottom: 40px;
-
-  &__list-item {
-    width: 292px;
-    height: 440px;
-  }
-}
-
-.tv-shows {
-  &__list-item {
-    width: 292px;
-    height: 440px;
   }
 }

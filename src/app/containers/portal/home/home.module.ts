@@ -8,7 +8,7 @@ import { MoviesService } from '@rest/movies/movies.service';
 import { GenresService } from '@rest/genres/genres.service';
 import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
-import { ListModule } from '@components/shared/list/list.module';
+import { CarouselModule } from '@components/shared/carousel/carousel.module';
 import { MediaCardModule } from '@components/shared/media-card/media-card.module';
 import { HeroSliderModule } from '@components/shared/hero-slider/hero-slider.module';
 import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
@@ -17,9 +17,9 @@ import { HomeComponent } from './home.component';
 
 @NgModule({
   imports: [
-    ListModule,
     HomeRouting,
     CommonModule,
+    CarouselModule,
     MediaCardModule,
     HeroSliderModule,
     GetImageLinkModule,
