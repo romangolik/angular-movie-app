@@ -1,39 +1,59 @@
 import { Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { concatMap, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { MoviesService } from '@rest/movies/movies.service';
 import { GenresService } from '@rest/genres/genres.service';
+import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
-import { MovieDto } from '@rest/movies/_types/movie.dto';
+import { MediaDto } from '@rest/media/_types/media.dto';
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
 @Injectable()
 export class HomeFacade {
   constructor(
     private moviesService: MoviesService,
-    private genresService: GenresService
+    private genresService: GenresService,
+    private tvShowsService: TvShowsService
   ) {}
 
-  getPopular(params?: Params): Observable<MovieDto[]> {
-    return this.moviesService.getPopular({
+  getTrendingMovies(params?: Params): Observable<MediaDto[]> {
+    return this.moviesService.getTrending({
       'language': 'en-US',
       'page': '1',
       ...params
     }).pipe(
-      concatMap(
+      switchMap(
         data => this.genresService.getAll()
           .pipe(
-            map(genres => data.results.map(movie => new MovieDto({
+            map(allGenres => data.results.map(movie => new MediaDto({
                 ...movie,
-                genres: this.getMovieGenres(movie.genre_ids, genres)
+                genres: this.getMovieGenres(movie.genre_ids, allGenres)
               }))
             )
           )
-      ),
+      )
+    );
+  }
 
+  getTrendingTvShows(params?: Params): Observable<MediaDto[]> {
+    return this.tvShowsService.getTrending({
+      'language': 'en-US',
+      'page': '1',
+      ...params
+    }).pipe(
+      switchMap(
+        data => this.genresService.getAll()
+          .pipe(
+            map(allGenres => data.results.map(tvShows => new MediaDto({
+                ...tvShows,
+                genres: this.getMovieGenres(tvShows.genre_ids, allGenres)
+              }))
+            )
+          )
+      )
     );
   }
 

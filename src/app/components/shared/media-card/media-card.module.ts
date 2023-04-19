@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
-import { MovieCardComponent } from './movie-card.component';
+import { MediaCardComponent } from './media-card.component';
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { MovieCardComponent } from './movie-card.component';
     RouterModule,
     GetImageLinkModule
   ],
-  declarations: [ MovieCardComponent ],
-  exports: [ MovieCardComponent ]
+  declarations: [ MediaCardComponent ],
+  exports: [ MediaCardComponent ]
 })
-export class MovieCardModule { }
+export class MediaCardModule { }

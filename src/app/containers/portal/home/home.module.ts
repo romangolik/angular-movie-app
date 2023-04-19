@@ -6,9 +6,10 @@ import { HomeRouting } from './home.routing';
 import { HomeFacade } from '@portal/home/home.facade';
 import { MoviesService } from '@rest/movies/movies.service';
 import { GenresService } from '@rest/genres/genres.service';
+import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
 import { ListModule } from '@components/shared/list/list.module';
-import { MovieCardModule } from '@components/shared/movie-card/movie-card.module';
+import { MediaCardModule } from '@components/shared/media-card/media-card.module';
 import { HeroSliderModule } from '@components/shared/hero-slider/hero-slider.module';
 import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
@@ -19,15 +20,16 @@ import { HomeComponent } from './home.component';
     ListModule,
     HomeRouting,
     CommonModule,
-    MovieCardModule,
+    MediaCardModule,
     HeroSliderModule,
-    GetImageLinkModule
+    GetImageLinkModule,
   ],
   declarations: [ HomeComponent ],
   providers: [
     HomeFacade,
     MoviesService,
-    GenresService
+    GenresService,
+    TvShowsService
   ]
 })
 export class HomeModule { }

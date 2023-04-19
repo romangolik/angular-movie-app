@@ -8,7 +8,7 @@
         class="link home__link"
         [href]="['./movie']"
         [routerLink]="['./movie']">
-        <span class="link__text">New releases</span>  
+        <span class="link__text">Trending Movies</span>  
         <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
       </a>
       <div class="movies__content">
@@ -18,7 +18,7 @@
           <app-list-item 
             *ngFor="let movie of movies"
             class="movies__list-item">
-            <app-movie-card [data]="movie"></app-movie-card>
+            <app-media-card [data]="movie"></app-media-card>
           </app-list-item>
         </app-list>
       </div>
@@ -28,14 +28,14 @@
         class="link home__link"
         [href]="['./tv-shows']"
         [routerLink]="['./tv-shows']">
-        <span class="link__text">Featured TV shows</span>  
+        <span class="link__text">Trending TV Shows</span>  
         <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
       </a>
       <app-list [gap]="16" class="tv-shows__list">
         <app-list-item 
-          *ngFor="let movie of movies"
+          *ngFor="let tvShow of tvShows"
           class="tv-shows__list-item">
-          <app-movie-card [data]="movie"></app-movie-card>
+          <app-media-card [data]="tvShow"></app-media-card>
         </app-list-item>
       </app-list>
     </section>

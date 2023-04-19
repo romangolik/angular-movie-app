@@ -9,14 +9,14 @@ import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
 @Injectable()
-export class MoviesService {
-  path = 'api/movie';
+export class TvShowsService {
+  path = 'api/tv';
 
   constructor(private http: HttpService) { }
 
   getTrending(params?: Params): Observable<PagebleDto<MediaDto>> {
     return this.http.getAllWithPagination<MediaDto>(
-      'api/trending/movie/week',
+      'api/trending/tv/week',
       params,
       MediaDto,
     );
