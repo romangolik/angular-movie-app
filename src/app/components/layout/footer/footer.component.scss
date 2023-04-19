@@ -1,8 +1,8 @@
 .footer {
-  --footer-padding: 50px;
+  --horizontal-padding: 50px;
 
-  padding: var(--footer-padding);
-  padding-left: calc(var(--sidebar-width) + var(--footer-padding));
+  padding: 20px var(--horizontal-padding) 50px;
+  padding-left: calc(var(--sidebar-width) + var(--horizontal-padding));
 
   color: var(--gray);
 }
