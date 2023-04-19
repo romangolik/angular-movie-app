@@ -15,9 +15,15 @@
 
   &__logo {
     display: block;
-    width: 100%;
+    width: 80%;
 
+    margin: 0 auto;
     margin-bottom: 64px;
+  }
+
+  &__logo-image {
+    display: block;
+    width: 100%;
   }
 
   &__navigation {
