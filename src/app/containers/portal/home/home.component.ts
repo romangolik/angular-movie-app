@@ -18,12 +18,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.facade.getTrendingMovies()
-      .subscribe(pagebleData => {
-        this.movies = pagebleData.results;
-        this.sliderMovies = pagebleData.results.slice(0, 5);
+      .subscribe(data => {
+        this.movies = data;
+        this.sliderMovies = data.slice(0, 5);
       });
 
     this.facade.getTrendingTvShows()
-      .subscribe(pagebleData => this.tvShows = pagebleData.results); 
+      .subscribe(data => this.tvShows = data); 
   }
 }
