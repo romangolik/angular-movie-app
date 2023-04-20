@@ -13,7 +13,8 @@
       href="/"
       routerLink="/"
       routerLinkActive="sidebar__navigation-item_active"
-      class="sidebar__navigation-item">
+      class="sidebar__navigation-item"
+      [routerLinkActiveOptions]="{ exact: true }">
       <svg><use xlink:href="assets/icons/sprite.svg#home-icon"></use></svg>
     </a>
     <a

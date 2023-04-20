@@ -44,4 +44,8 @@ export class GenresService {
   getTVList(params?: Params): Observable<GenreDto[]> {
     return this.getAllByMediaType(MediaTypesEnum.TV, GenresStorageKeysEnum.TV, params);
   }
+
+  getByIds(ids: number[], allGenres: GenreDto[]): GenreDto[] {
+    return allGenres.filter(genre => ids.includes(genre.id));
+  }
 }

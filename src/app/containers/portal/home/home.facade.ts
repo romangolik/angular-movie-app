@@ -1,7 +1,7 @@
 import { Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { MoviesService } from '@rest/movies/movies.service';
@@ -24,7 +24,15 @@ export class HomeFacade {
       'page': '1',
       ...params
     }).pipe(
-      map(data => data.results)
+      map(data => data.results),
+      switchMap(
+        movies => this.genresService.getMovieList().pipe(
+          map(allGenres => movies.map(movie => ({
+            ...movie,
+            genres: this.genresService.getByIds(movie.genre_ids, allGenres)
+          })))
+        )
+      )
     );
   }
 
