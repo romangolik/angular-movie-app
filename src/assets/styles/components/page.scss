@@ -1,0 +1,17 @@
+.page {
+  &__hero {
+    position: sticky;
+    top: 0;
+
+    width: 100%;
+    aspect-ratio: 12 / 5;
+  }
+
+  &__content {
+    position: relative;
+    padding: 1px 0;
+
+    box-sizing: border-box;
+    background-color: var(--darker-gray);
+  }
+}
