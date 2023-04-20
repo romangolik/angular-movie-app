@@ -1,6 +1,6 @@
 <div class="home">
   <header class="home__hero">
-    <app-hero-slider [data]="sliderMovies"></app-hero-slider>
+    <app-hero-slider [data]="sliderItems"></app-hero-slider>
   </header>
   <section class="home__content">
     <section class="listing listing_carousel">
@@ -16,7 +16,7 @@
       <div class="listing__content">
         <app-carousel [gap]="16">
           <app-carousel-item 
-            *ngFor="let movie of movies"
+            *ngFor="let movie of $trendingMovies | async"
             class="listing__carousel-item">
             <app-media-card [data]="movie"></app-media-card>
           </app-carousel-item>
@@ -35,7 +35,7 @@
       </header>
       <app-carousel [gap]="16">
         <app-carousel-item 
-          *ngFor="let tvShow of tvShows"
+          *ngFor="let tvShow of $trendingTVShows | async"
           class="listing__carousel-item">
           <app-media-card [data]="tvShow"></app-media-card>
         </app-carousel-item>
