@@ -1,11 +1,10 @@
 import {
   Input,
   Component,
+  OnDestroy,
   ViewChild,
   QueryList,
   ElementRef,
-  OnDestroy,
-  AfterViewInit,
   ContentChildren,
   AfterContentInit,
   ViewEncapsulation,
@@ -17,6 +16,8 @@ import { take } from 'rxjs';
 
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 
+const SCROLL_PADIING = 100;
+
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
@@ -24,17 +25,28 @@ import { CarouselItemComponent } from './carousel-item/carousel-item.component';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDestroy {
-  @ViewChild('carousel') carousel: ElementRef;
+export class CarouselComponent implements AfterContentInit, OnDestroy {
+  @ViewChild('carousel') 
+  set carousel(value: ElementRef) {
+    if (value) {
+      this.carouselNativeElement = value.nativeElement;
+      this.carouselWidth = value.nativeElement.clientWidth;
+    }
+  }
   @ContentChildren(CarouselItemComponent, { read: ElementRef }) carouselItems: QueryList<ElementRef>;
 
   @Input() gap: number;
 
-  carouselItem: ElementRef;
-  carouselSyles: CSSStyleDeclaration;
+  carouselWidth: number;
+  itemsPositions: number[];
+  visibleItemsCount: number;
+  carouselItemWidth: number;
+  intersectionObserver: IntersectionObserver;
+  carouselNativeElement: HTMLElement;
+
+  currentItemIndex = 0;
   isPrevButtonHidden = true;
   isNextButtonHidden = false;
-  intersectionObserver: IntersectionObserver;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -42,18 +54,41 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
     this.carouselItems.changes
       .pipe(take(1))
       .subscribe(queryList => {
-        this.carouselItem = queryList.first;
+        this.carouselItemWidth = queryList.first.nativeElement.clientWidth;
+        this.itemsPositions = this.calculateItemsPositions(queryList.toArray());
+        this.visibleItemsCount = this.calculateVisibleElementsCount();
         setTimeout(() => this.initIntersectionObserver(queryList.toArray()), 1000);
       });
   }
 
-  ngAfterViewInit(): void {
-    this.carouselSyles = getComputedStyle(this.carousel.nativeElement);
+  calculateItemsPositions(carouselItems: ElementRef[]): number[] {
+    return carouselItems.map((item, index) => {
+      return (this.carouselItemWidth + this.gap) * index; 
+    });
+  }
+
+  calculateVisibleElementsCount(): number {
+    let count = 1;
+    let width = this.carouselItemWidth;
+
+    const maximalOffsetWidth = this.carouselWidth - SCROLL_PADIING;
+
+    while(true) {
+      width += this.carouselItemWidth + this.gap;
+
+      if (width > maximalOffsetWidth) {
+        break;
+      }
+
+      count++;
+    }
+
+    return count;
   }
 
   initIntersectionObserver(targets: ElementRef[]): void {
     const options = {
-      root: this.carousel.nativeElement,
+      root: this.carouselNativeElement,
       rootMargin: '0px',
       threshold: 1.0,
     };
@@ -77,18 +112,30 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
     this.intersectionObserver.observe(lastListIem);
   }
 
-  calculateOffsetWidth(): number {
-    const listWidth = this.carousel.nativeElement.clientWidth;
-    const scrollPadding = +this.carouselSyles.getPropertyValue('--scroll-padding').replace('px', '');
-    const listItemWidth = this.carouselItem.nativeElement.clientWidth;
+  calculateNextItemIndex(direction: number): number {
+    const maxValue = this.carouselItems.length - 1;
+    const nextIndex = this.currentItemIndex + this.visibleItemsCount * direction;
 
-    const maximalOffsetWidth = listWidth - listItemWidth - this.gap - scrollPadding;
+    if (nextIndex <= 0) {
+      return 0;
+    }
+
+    if (nextIndex >= maxValue) {
+      return maxValue;
+    }
+
+    return nextIndex;
+  }
+
+  calculateOffsetWidth(): number {
+    const scrollPadding = 50 * 2;
+    const maximalOffsetWidth = this.carouselWidth - this.carouselItemWidth - this.gap - scrollPadding;
 
     let i = 0;
     let offsetWidth = 0;
 
     while (offsetWidth <= maximalOffsetWidth) {
-      offsetWidth += listItemWidth;
+      offsetWidth += this.carouselItemWidth;
 
       if (i !== 0) {
         offsetWidth += this.gap;
@@ -97,23 +144,23 @@ export class CarouselComponent implements AfterContentInit, AfterViewInit, OnDes
       i++;
     }
 
-    return offsetWidth;
+    return offsetWidth - this.gap;
   }
 
   prevItems(): void {
-    const listElement = this.carousel.nativeElement;
+    this.currentItemIndex = this.calculateNextItemIndex(-1);
 
-    listElement.scrollTo({
-      left: listElement.scrollLeft - this.calculateOffsetWidth(),
+    this.carouselNativeElement.scrollTo({
+      left: this.itemsPositions[this.currentItemIndex],
       behavior: 'smooth',
     });
   }
 
   nextItems(): void {
-    const listElement = this.carousel.nativeElement;
+    this.currentItemIndex = this.calculateNextItemIndex(1);
 
-    listElement.scrollTo({
-      left: listElement.scrollLeft + this.calculateOffsetWidth(),
+    this.carouselNativeElement.scrollTo({
+      left: this.itemsPositions[this.currentItemIndex],
       behavior: 'smooth',
     });
   }
