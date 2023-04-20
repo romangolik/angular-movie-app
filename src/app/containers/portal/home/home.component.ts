@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeFacade } from '@portal/home/home.facade';
 
 import { MediaDto } from '@rest/media/_types/media.dto';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,18 +13,17 @@ import { MediaDto } from '@rest/media/_types/media.dto';
 export class HomeComponent implements OnInit {
   movies: MediaDto[];
   tvShows: MediaDto[];
-  sliderMovies: MediaDto[];
+  sliderItems: MediaDto[];
+
+  $trendingMovies: Observable<MediaDto[]>;
+  $trendingTVShows: Observable<MediaDto[]>;
 
   constructor(private facade: HomeFacade) { }
 
   ngOnInit(): void {
-    this.facade.getTrendingMovies()
-      .subscribe(data => {
-        this.movies = data;
-        this.sliderMovies = data.slice(0, 5);
-      });
+    this.$trendingMovies = this.facade.getTrendingMovies()
+      .pipe(tap(data => this.sliderItems = data.slice(0, 5)));
 
-    this.facade.getTrendingTvShows()
-      .subscribe(data => this.tvShows = data); 
+    this.$trendingTVShows = this.facade.getTrendingTvShows(); 
   }
 }

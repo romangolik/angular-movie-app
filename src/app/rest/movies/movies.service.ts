@@ -21,4 +21,36 @@ export class MoviesService {
       MediaDto,
     );
   }
+
+  getPopular(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/popular`,
+      params,
+      MediaDto,
+    );
+  }
+
+  getTopRated(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/top_rated`,
+      params,
+      MediaDto,
+    );
+  }
+
+  getUpcoming(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/upcoming`,
+      params,
+      MediaDto,
+    );
+  }
+
+  getNowPlaying(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/now_playing`,
+      params,
+      MediaDto,
+    );
+  }
 }
