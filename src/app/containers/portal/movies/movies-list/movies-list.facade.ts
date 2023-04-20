@@ -10,13 +10,13 @@ import { GenresService } from '@rest/genres/genres.service';
 import { MediaDto } from '@rest/media/_types/media.dto';
 
 @Injectable()
-export class HomeFacade {
+export class MoviesListFacade {
   constructor(
     private moviesService: MoviesService,
     private genresService: GenresService,
   ) {}
 
-  getTrendingMovies(params?: Params): Observable<MediaDto[]> {
+  getTrending(params?: Params): Observable<MediaDto[]> {
     return this.moviesService.getTrending({
       'language': 'en-US',
       'page': '1',
@@ -32,5 +32,37 @@ export class HomeFacade {
         )
       )
     );
+  }
+
+  getPopular(params?: Params): Observable<MediaDto[]> {
+    return this.moviesService.getPopular({
+      'language': 'en-US',
+      'page': '1',
+      ...params
+    }).pipe(map(data => data.results));
+  }
+
+  getTopRated(params?: Params): Observable<MediaDto[]> {
+    return this.moviesService.getTopRated({
+      'language': 'en-US',
+      'page': '1',
+      ...params
+    }).pipe(map(data => data.results));
+  }
+
+  getUpcoming(params?: Params): Observable<MediaDto[]> {
+    return this.moviesService.getUpcoming({
+      'language': 'en-US',
+      'page': '1',
+      ...params
+    }).pipe(map(data => data.results));
+  }
+
+  getNowPlaying(params?: Params): Observable<MediaDto[]> {
+    return this.moviesService.getNowPlaying({
+      'language': 'en-US',
+      'page': '1',
+      ...params
+    }).pipe(map(data => data.results));
   }
 }
