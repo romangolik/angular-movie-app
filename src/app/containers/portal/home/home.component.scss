@@ -3,7 +3,8 @@
     position: sticky;
     top: 0;
 
-    height: 100vh;
+    width: 100%;
+    aspect-ratio: 12 / 5;
   }
 
   &__content {

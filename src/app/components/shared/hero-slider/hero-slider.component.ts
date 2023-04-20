@@ -4,8 +4,8 @@ import {
   OnDestroy,
   Component,
   HostListener,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import {
