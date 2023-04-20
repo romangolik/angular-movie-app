@@ -26,9 +26,14 @@ import { MediaDto } from '@rest/media/_types/media.dto';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeroSliderComponent implements OnInit, OnDestroy {
-  @HostListener('document:visibilitychange')
-  onKeyUp(): void {
-    this.playing.next(!document.hidden);
+  @HostListener('window:focus')
+  onFocus(): void {
+    this.playing.next(true);
+  }
+
+  @HostListener('window:blur')
+  onBlur(): void {
+    this.playing.next(false);
   }
 
   @Input() 
@@ -58,16 +63,13 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   }
 
   initSlider(): void {
-    if (this.interval) {
-      this.playing
-        .pipe(
-          switchMap((status) =>
-            status ? interval(this.interval).pipe(takeUntil(this.destroy$)) : never()
-          ),
-          takeUntil(this.destroy$)
-        )
-        .subscribe(() => this.changeSlide());
-    }
+    this.playing
+      .pipe(
+        switchMap((status) =>
+          status ? interval(this.interval).pipe(takeUntil(this.destroy$)) : never()
+        ),
+        takeUntil(this.destroy$)
+      ).subscribe(() => this.changeSlide());
   }
 
   changeSlide(): void {
@@ -78,7 +80,6 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
 
   setIndexes(activeIndex: number): void {
     this.activeSlide = this.calculateIndex(activeIndex);
-
     this.nextSlide = this.calculateIndex(this.activeSlide + 1);
     this.prevSlide = this.calculateIndex(this.activeSlide - 1);
 

@@ -22,6 +22,7 @@
   clip-path: inset(0 0 0 100%);
 
   transition: 1s linear clip-path;
+  transition-delay: 1.5s;
 
   .hero__animation-element {
     animation: 0.6s cubic-bezier(.7,-.4,.4,1.4) fadeDown both;
@@ -32,12 +33,14 @@
 
     clip-path: inset(0 0 0 0);
 
+    transition-delay: 0s;
+
     .hero__animation-element {
       animation: 1s cubic-bezier(.7,-.4,.4,1.4) fadeUp var(--delay, 0s) both;
     }
   }
 
   &_prev {
-    transition-delay: 1.2s;
+    transition-delay: 1.5s;
   }
 }

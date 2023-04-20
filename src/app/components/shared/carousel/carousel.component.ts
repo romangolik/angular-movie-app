@@ -57,7 +57,7 @@ export class CarouselComponent implements AfterContentInit, OnDestroy {
         this.carouselItemWidth = queryList.first.nativeElement.clientWidth;
         this.itemsPositions = this.calculateItemsPositions(queryList.toArray());
         this.visibleItemsCount = this.calculateVisibleElementsCount();
-        setTimeout(() => this.initIntersectionObserver(queryList.toArray()), 1000);
+        this.initIntersectionObserver(queryList.toArray());
       });
   }
 
