@@ -7,26 +7,41 @@ import { HttpService } from '@core/http/http.service';
 
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
-const STORAGE_KEY = 'genres'; 
+import { MediaTypesEnum } from '@rest/media/_types/media-types.enum';
+import { GenresStorageKeysEnum } from './_data/genres-storage-keys.enum';
 
 @Injectable()
 export class GenresService {
-  path = 'api/genre/movie/list';
+  path = 'api/genre';
 
   constructor(private http: HttpService) { }
 
-  getAll(params?: Params): Observable<GenreDto[]> {
-    const lodalStorageData = localStorage.getItem(STORAGE_KEY);
+  private getAllByMediaType(
+    mediaType: MediaTypesEnum, 
+    storegeKey: GenresStorageKeysEnum, 
+    params?: Params
+  ): Observable<GenreDto[]> {
+    const localStorageData = localStorage.getItem(storegeKey);
 
-    if (lodalStorageData) {
-      return of(JSON.parse(lodalStorageData).map(genre => new GenreDto(genre)));
+    if (localStorageData) {
+      return of(JSON.parse(localStorageData).map(genre => new GenreDto(genre)));
     }
 
     return this.http.getAll<GenreDto>(
-      this.path,
+      `${this.path}/${mediaType}/list`,
       params,
       GenreDto,
       'genres'
-    ).pipe(tap(genres => localStorage.setItem(STORAGE_KEY, JSON.stringify(genres))));
+    ).pipe(
+        tap(genres => localStorage.setItem(storegeKey, JSON.stringify(genres)))
+      );
+  }
+
+  getMovieList(params?: Params): Observable<GenreDto[]> {
+    return this.getAllByMediaType(MediaTypesEnum.MOVIE, GenresStorageKeysEnum.MOVIE, params);
+  }
+
+  getTVList(params?: Params): Observable<GenreDto[]> {
+    return this.getAllByMediaType(MediaTypesEnum.TV, GenresStorageKeysEnum.TV, params);
   }
 }
