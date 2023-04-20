@@ -26,10 +26,11 @@ export class RestInterceptor implements HttpInterceptor {
     };
   }
 
-  private getContentTypeHeader(request: HttpRequest<unknown>): {'Content-Type': string} {
-    if (!(request.body instanceof FormData)) {
+  private getContentTypeHeader(request: HttpRequest<unknown>): {'Content-Type': string, Authorization: string} {
+    if (request.method === 'GET') {
       return {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTk5NDJlOWYxN2E3ODFjM2Y1ZWI0YTkxZTQ0MzUzYSIsInN1YiI6IjYzNGQxMzFiZWY5ZDcyMDA3ZDA2ZTg2NCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CJcHKRrxGy6nhYGGqlWpQVyKwgG_kI6hPF13JNeA7MQ'
       };
     }
   }

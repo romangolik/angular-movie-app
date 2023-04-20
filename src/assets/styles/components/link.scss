@@ -1,0 +1,35 @@
+.link {
+  display: inline-flex;
+
+  color: var(--white);
+  align-items: center;
+
+  transition: 0.4s ease all;
+
+  &:hover {
+    color: var(--teal);
+  }
+
+  &__text {
+    font: inherit;
+    line-height: inherit;
+
+    color: inherit;
+  }
+
+  &__icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+
+    color: inherit;
+
+    &:first-child {
+      margin-right: 8px;
+    }
+
+    &:last-child {
+      margin-left: 8px;
+    }
+  }
+}

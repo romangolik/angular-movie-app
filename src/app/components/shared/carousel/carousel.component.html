@@ -1,0 +1,20 @@
+<div class="carousel">
+  <button 
+    class="carousel__button carousel__button_prev"
+    [hidden]="isPrevButtonHidden"
+    (click)="prevItems()">
+    <svg class="carousel__button-icon"><use xlink:href="assets/icons/sprite.svg#left-arrow-icon"></use></svg>
+  </button>
+  <ul 
+    #carousel
+    [ngStyle]="gap ? {'grid-gap.px': gap} : {}"
+    class="carousel__content">
+    <ng-content select="app-carousel-item"></ng-content>
+  </ul>
+  <button 
+    class="carousel__button carousel__button_next"
+    [hidden]="isNextButtonHidden"
+    (click)="nextItems()">
+    <svg class="carousel__button-icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+  </button>
+</div>

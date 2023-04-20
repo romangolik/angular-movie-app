@@ -7,6 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: PortalComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./home/home.module').then(u => u.HomeModule)
+      }
+    ]
   }
 ];
 

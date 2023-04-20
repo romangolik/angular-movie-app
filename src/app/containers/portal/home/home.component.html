@@ -1,0 +1,45 @@
+<div class="home">
+  <header class="home__hero">
+    <app-hero-slider [data]="sliderMovies"></app-hero-slider>
+  </header>
+  <section class="home__content">
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./movie']"
+          [routerLink]="['./movie']">
+          <span class="link__text">Trending Movies</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <div class="listing__content">
+        <app-carousel [gap]="16">
+          <app-carousel-item 
+            *ngFor="let movie of movies"
+            class="listing__carousel-item">
+            <app-media-card [data]="movie"></app-media-card>
+          </app-carousel-item>
+        </app-carousel>
+      </div>
+    </section>
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./tv-shows']"
+          [routerLink]="['./tv-shows']">
+          <span class="link__text">Trending TV Shows</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <app-carousel [gap]="16">
+        <app-carousel-item 
+          *ngFor="let tvShow of tvShows"
+          class="listing__carousel-item">
+          <app-media-card [data]="tvShow"></app-media-card>
+        </app-carousel-item>
+      </app-carousel>
+    </section>
+  </section>
+</div>

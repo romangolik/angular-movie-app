@@ -1,0 +1,25 @@
+.listing  {
+  margin: 50px;
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    color: var(--white);
+  }
+
+  &__carousel-item {
+    width: 292px;
+    height: 440px;
+  }
+
+  &_carousel {
+    margin-left: 0;
+    margin-right: 0;
+
+    .listing__header {
+      margin-left: 50px;
+    }
+  }
+}

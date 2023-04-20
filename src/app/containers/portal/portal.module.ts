@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PortalRouting } from './portal.routing';
 
 import { PortalComponent } from './portal.component';
+import { FooterComponent } from '@components/layout/footer/footer.component';
 import { SidebarComponent } from '@components/layout/sidebar/sidebar.component';
 
 @NgModule({
@@ -12,8 +13,9 @@ import { SidebarComponent } from '@components/layout/sidebar/sidebar.component';
     PortalRouting,
   ],
   declarations: [
+    FooterComponent,
     PortalComponent,
-    SidebarComponent
+    SidebarComponent,
   ]
 })
 export class PortalModule { }

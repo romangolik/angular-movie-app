@@ -1,0 +1,23 @@
+.rating {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  &__stars {
+    --star-size: 16px;
+
+    display: flex;
+    width: calc((var(--rating) / 10) * (var(--star-size) * 5));
+
+    color: var(--teal);
+    overflow: hidden;
+
+    svg {
+      display: block;
+      width: var(--star-size);
+      height: var(--star-size);
+
+      flex: none;
+    }
+  }
+}

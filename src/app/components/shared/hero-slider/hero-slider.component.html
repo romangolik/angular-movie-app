@@ -1,0 +1,12 @@
+<div class="hero-slider">
+  <div class="hero-slider__slides">
+    <div 
+      *ngFor="let item of data; let i = index"
+      [class.hero-slider__slide_active]="i === activeSlide"
+      class="hero-slider__slide">
+      <app-hero 
+        [mediaData]="item"
+        [hideInfo]="i !== activeSlide"></app-hero>
+    </div>
+  </div>
+</div>
