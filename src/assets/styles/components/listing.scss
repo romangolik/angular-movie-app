@@ -9,6 +9,13 @@
     color: var(--white);
   }
 
+  &__preview-card {
+    width: 292px;
+    height: 440px;
+  
+    background-color: var(--dark-gray);
+  }
+
   &__carousel-item {
     width: 292px;
     height: 440px;
@@ -20,6 +27,12 @@
 
     .listing__header {
       margin-left: 50px;
+    }
+
+    .listing__preview-card {
+      &:first-child {
+        margin-left: var(--scroll-padding);
+      }
     }
   }
 }

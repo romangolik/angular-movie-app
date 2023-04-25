@@ -9,7 +9,7 @@
           class="link large-text"
           [href]="['./category/popular']"
           [routerLink]="['./category/popular']">
-          <span class="link__text">Popular Movies</span>  
+          <span class="link__text">Popular Tv Shows</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
       </header>
@@ -31,7 +31,7 @@
           class="link large-text"
           [href]="['./category/top-rated']"
           [routerLink]="['./category/top-rated']">
-          <span class="link__text">Top Rated Movies</span>  
+          <span class="link__text">Top Rated TV Shows</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
       </header>
@@ -53,7 +53,7 @@
           class="link large-text"
           [href]="['./category/upcoming']"
           [routerLink]="['./category/upcoming']">
-          <span class="link__text">Upcoming Movies</span>  
+          <span class="link__text">Currently Airing TV Shows</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
       </header>
@@ -62,7 +62,7 @@
           [gap]="16"
           [previewCardTemplate]="previewCard">
           <app-carousel-item 
-            *ngFor="let movie of $upcomingMovies | async"
+            *ngFor="let movie of $currentlyAiring | async"
             class="listing__carousel-item">
             <app-media-card [data]="movie"></app-media-card>
           </app-carousel-item>
@@ -75,7 +75,7 @@
           class="link large-text"
           [href]="['./category/now-playing']"
           [routerLink]="['./category/now-playing']">
-          <span class="link__text">Now Playing Movies</span>  
+          <span class="link__text">TV Shows Airing Today</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
       </header>
@@ -84,7 +84,7 @@
           [gap]="16"
           [previewCardTemplate]="previewCard">
           <app-carousel-item 
-            *ngFor="let movie of $nowPlayingMovies | async"
+            *ngFor="let movie of $airingToday | async"
             class="listing__carousel-item">
             <app-media-card [data]="movie"></app-media-card>
           </app-carousel-item>

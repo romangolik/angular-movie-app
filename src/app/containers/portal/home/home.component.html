@@ -14,7 +14,9 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel [gap]="16">
+        <app-carousel 
+          [gap]="16" 
+          [previewCardTemplate]="previewCard">
           <app-carousel-item 
             *ngFor="let movie of $trendingMovies | async"
             class="listing__carousel-item">
@@ -33,7 +35,9 @@
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
       </header>
-      <app-carousel [gap]="16">
+      <app-carousel 
+        [gap]="16" 
+        [previewCardTemplate]="previewCard">
         <app-carousel-item 
           *ngFor="let tvShow of $trendingTVShows | async"
           class="listing__carousel-item">
@@ -43,3 +47,11 @@
     </section>
   </section>
 </div>
+<ng-template #previewCard>
+  <li class="card card_preview listing__preview-card">
+    <div class="card__info">
+      <span class="card__preview-item card__rating"></span>
+      <span class="card__preview-item card__title"></span>
+    </div>
+  </li>
+</ng-template>
