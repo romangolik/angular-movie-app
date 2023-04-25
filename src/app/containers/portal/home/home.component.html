@@ -6,9 +6,9 @@
     <section class="listing listing_carousel">
       <header class="listing__header">
         <a 
-          class="link large-text"
-          [href]="['./movie']"
-          [routerLink]="['./movie']">
+          class="listing__title link large-text"
+          [href]="['/movie/category/trending']"
+          [routerLink]="['/movie/category/trending']">
           <span class="link__text">Trending Movies</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
@@ -28,7 +28,7 @@
     <section class="listing listing_carousel">
       <header class="listing__header">
         <a 
-          class="link large-text"
+          class="listing__title link large-text"
           [href]="['./tv-shows']"
           [routerLink]="['./tv-shows']">
           <span class="link__text">Trending TV Shows</span>  
