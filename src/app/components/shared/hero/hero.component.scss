@@ -9,6 +9,7 @@
 
   overflow: hidden;
   box-sizing: border-box;
+  background-color: var(--black);
 
   &::before {
     content: '';
