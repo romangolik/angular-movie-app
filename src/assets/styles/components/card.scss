@@ -60,6 +60,7 @@
     z-index: 2;
 
     display: grid;
+    width: 100%;
     padding: 24px;
     grid-gap: 16px;
 
@@ -78,36 +79,64 @@
     @include text-overflow();
   }
 
-  &__link {
-    position: absolute;
-    left: 24px;
-    bottom: 24px;
-    z-index: 2;
-
-    opacity: 0;
-
-    transition: 0.4s ease opacity;
-  }
-
-  &:hover {
-    .card__image {
-      transform: scale(1.08);
-    }
-
-    .card__info {
-      transform: translateY(-40px);
-    }
-
-    .card__link {
-      opacity: 1;
-    }
-  }
-
   &:not(.loaded) {
     .card__image {
       opacity: 0;
 
       transform: scale(0.92);
     }
+  }
+
+  &__preview-item {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: #424242;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 50%;
+      height: 100%;
+
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #838383,
+        transparent
+      );
+
+      animation: loading 1.4s infinite;
+    }
+  }
+
+  &_preview {
+    &::before {
+      display: none;
+    }
+
+    .card__rating {
+      height: 16px;
+    }
+
+    .card__title {
+      height: 30px;
+    }
+  }
+}
+
+@keyframes loading {
+  0%, 10% {
+    transform: skewX(-10deg) translateX(-100%);
+  }
+  90%, 100% {
+    transform: skewX(-10deg) translateX(200%);
   }
 }
