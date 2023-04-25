@@ -1,28 +1,8 @@
 <div class="movies page">
   <header class="page__hero">
-    <app-hero-slider [data]="sliderItems"></app-hero-slider>
+    <app-hero-slider [data]="$sliderItems | async"></app-hero-slider>
   </header>
   <div class="page__content">
-    <section class="listing listing_carousel">
-      <header class="listing__header">
-        <a 
-          class="link large-text"
-          [href]="['./movie']"
-          [routerLink]="['./movie']">
-          <span class="link__text">Trending Movies</span>  
-          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
-        </a>
-      </header>
-      <div class="listing__content">
-        <app-carousel [gap]="16">
-          <app-carousel-item 
-            *ngFor="let movie of $trendingMovies | async"
-            class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
-          </app-carousel-item>
-        </app-carousel>
-      </div>
-    </section>
     <section class="listing listing_carousel">
       <header class="listing__header">
         <a 

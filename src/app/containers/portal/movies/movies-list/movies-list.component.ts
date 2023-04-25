@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, tap } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 import { MoviesListFacade } from './movies-list.facade';
 
@@ -12,8 +12,7 @@ import { MediaDto } from '@rest/media/_types/media.dto';
   styleUrls: ['./movies-list.component.scss']
 })
 export class MoviesListComponent implements OnInit {
-  sliderItems: MediaDto[];
-  $trendingMovies: Observable<MediaDto[]>;
+  $sliderItems: Observable<MediaDto[]>;
   $popularMovies: Observable<MediaDto[]>;
   $topRatedMovies: Observable<MediaDto[]>;
   $upcomingMovies: Observable<MediaDto[]>;
@@ -22,8 +21,7 @@ export class MoviesListComponent implements OnInit {
   constructor(private facade: MoviesListFacade) {}
 
   ngOnInit(): void {
-    this.$trendingMovies = this.facade.getTrending()
-      .pipe(tap(data => this.sliderItems = data.slice(0, 5)));
+    this.$sliderItems = this.facade.getTrending().pipe(take(5));
     this.$popularMovies = this.facade.getPopular();
     this.$topRatedMovies = this.facade.getTopRated();
     this.$upcomingMovies = this.facade.getUpcoming();
