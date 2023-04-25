@@ -14,7 +14,9 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel [gap]="16">
+        <app-carousel 
+          [gap]="16"
+          [previewCardTemplate]="previewCard">
           <app-carousel-item 
             *ngFor="let movie of $popularMovies | async"
             class="listing__carousel-item">
@@ -34,7 +36,9 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel [gap]="16">
+        <app-carousel 
+          [gap]="16"
+          [previewCardTemplate]="previewCard">
           <app-carousel-item 
             *ngFor="let movie of $topRatedMovies | async"
             class="listing__carousel-item">
@@ -54,7 +58,9 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel [gap]="16">
+        <app-carousel 
+          [gap]="16"
+          [previewCardTemplate]="previewCard">
           <app-carousel-item 
             *ngFor="let movie of $upcomingMovies | async"
             class="listing__carousel-item">
@@ -74,7 +80,9 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel [gap]="16">
+        <app-carousel 
+          [gap]="16"
+          [previewCardTemplate]="previewCard">
           <app-carousel-item 
             *ngFor="let movie of $nowPlayingMovies | async"
             class="listing__carousel-item">
@@ -85,3 +93,6 @@
     </section>
   </div>
 </div>
+<ng-template #previewCard>
+  <li class="listing__preview-card"></li>
+</ng-template>
