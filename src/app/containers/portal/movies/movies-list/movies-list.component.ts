@@ -6,6 +6,8 @@ import { MoviesListFacade } from './movies-list.facade';
 
 import { MediaDto } from '@rest/media/_types/media.dto';
 
+import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
+
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
@@ -17,6 +19,8 @@ export class MoviesListComponent implements OnInit {
   $topRatedMovies: Observable<MediaDto[]>;
   $upcomingMovies: Observable<MediaDto[]>;
   $nowPlayingMovies: Observable<MediaDto[]>;
+
+  categoriesEnum = CategoriesEnum;
 
   constructor(private facade: MoviesListFacade) {}
 

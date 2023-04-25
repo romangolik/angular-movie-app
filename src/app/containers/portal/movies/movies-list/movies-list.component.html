@@ -7,8 +7,8 @@
       <header class="listing__header">
         <a 
           class="listing__title link large-text"
-          [href]="['./category/popular']"
-          [routerLink]="['./category/popular']">
+          [href]="['./category', categoriesEnum.Popular]"
+          [routerLink]="['./category', categoriesEnum.Popular]">
           <span class="link__text">Popular Movies</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
@@ -29,8 +29,8 @@
       <header class="listing__header">
         <a 
           class="listing__title link large-text"
-          [href]="['./category/top-rated']"
-          [routerLink]="['./category/top-rated']">
+          [href]="['./category', categoriesEnum.TopRated]"
+          [routerLink]="['./category', categoriesEnum.TopRated]">
           <span class="link__text">Top Rated Movies</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
@@ -51,8 +51,8 @@
       <header class="listing__header">
         <a 
           class="listing__title link large-text"
-          [href]="['./category/upcoming']"
-          [routerLink]="['./category/upcoming']">
+          [href]="['./category', categoriesEnum.Upcoming]"
+          [routerLink]="['./category', categoriesEnum.Upcoming]">
           <span class="link__text">Upcoming Movies</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
@@ -73,8 +73,8 @@
       <header class="listing__header">
         <a 
           class="listing__title link large-text"
-          [href]="['./category/now-playing']"
-          [routerLink]="['./category/now-playing']">
+          [href]="['./category', categoriesEnum.NowPlaying]"
+          [routerLink]="['./category', categoriesEnum.NowPlaying]">
           <span class="link__text">Now Playing Movies</span>  
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>

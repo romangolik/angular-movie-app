@@ -13,7 +13,7 @@ const routes: Routes = [
         loadChildren: () => import('./home/home.module').then(u => u.HomeModule)
       },
       {
-        path: 'movies',
+        path: 'movie',
         loadChildren: () => import('./movies/movies.module').then(u => u.MoviesModule)
       },
       {
