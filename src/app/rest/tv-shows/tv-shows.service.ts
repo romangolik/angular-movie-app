@@ -21,4 +21,36 @@ export class TvShowsService {
       MediaDto,
     );
   }
+
+  getPopular(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/popular`,
+      params,
+      MediaDto,
+    );
+  }
+
+  getTopRated(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/top_rated`,
+      params,
+      MediaDto,
+    );
+  }
+
+  getCurrentlyAiring(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/on_the_air`,
+      params,
+      MediaDto,
+    );
+  }
+
+  getAiringToday(params?: Params): Observable<PagebleDto<MediaDto>> {
+    return this.http.getAllWithPagination<MediaDto>(
+      `${this.path}/airing_today`,
+      params,
+      MediaDto,
+    );
+  }
 }

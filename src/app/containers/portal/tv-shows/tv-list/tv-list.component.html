@@ -1,1 +1,87 @@
-<p>tv-list works!</p>
+<div class="movies page">
+  <header class="page__hero">
+    <app-hero-slider [data]="$sliderItems | async"></app-hero-slider>
+  </header>
+  <div class="page__content">
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./category/popular']"
+          [routerLink]="['./category/popular']">
+          <span class="link__text">Popular Tv Shows</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <div class="listing__content">
+        <app-carousel [gap]="16">
+          <app-carousel-item 
+            *ngFor="let movie of $popularMovies | async"
+            class="listing__carousel-item">
+            <app-media-card [data]="movie"></app-media-card>
+          </app-carousel-item>
+        </app-carousel>
+      </div>
+    </section>
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./category/top-rated']"
+          [routerLink]="['./category/top-rated']">
+          <span class="link__text">Top Rated TV Shows</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <div class="listing__content">
+        <app-carousel [gap]="16">
+          <app-carousel-item 
+            *ngFor="let movie of $topRatedMovies | async"
+            class="listing__carousel-item">
+            <app-media-card [data]="movie"></app-media-card>
+          </app-carousel-item>
+        </app-carousel>
+      </div>
+    </section>
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./category/upcoming']"
+          [routerLink]="['./category/upcoming']">
+          <span class="link__text">Currently Airing TV Shows</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <div class="listing__content">
+        <app-carousel [gap]="16">
+          <app-carousel-item 
+            *ngFor="let movie of $currentlyAiring | async"
+            class="listing__carousel-item">
+            <app-media-card [data]="movie"></app-media-card>
+          </app-carousel-item>
+        </app-carousel>
+      </div>
+    </section>
+    <section class="listing listing_carousel">
+      <header class="listing__header">
+        <a 
+          class="link large-text"
+          [href]="['./category/now-playing']"
+          [routerLink]="['./category/now-playing']">
+          <span class="link__text">TV Shows Airing Today</span>  
+          <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
+        </a>
+      </header>
+      <div class="listing__content">
+        <app-carousel [gap]="16">
+          <app-carousel-item 
+            *ngFor="let movie of $airingToday | async"
+            class="listing__carousel-item">
+            <app-media-card [data]="movie"></app-media-card>
+          </app-carousel-item>
+        </app-carousel>
+      </div>
+    </section>
+  </div>
+</div>
