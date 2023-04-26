@@ -17,6 +17,8 @@ import { AllowedServicesMethods } from './_types/allowed-services-methods.type';
 
 import { CategoriesEnum } from './_data/categories.enum';
 
+import { CATEGORY_TITLES } from './_data/category-titles';
+
 @Injectable()
 export class CategoriesService {
   SERVICES: CategoryServices = {
@@ -45,6 +47,10 @@ export class CategoriesService {
     private moviesSevice: MoviesService, 
     private tvShowsService: TvShowsService
   ) {}
+
+  getTitle(mediaType: MediaTypesEnum, categoryType: CategoriesEnum): string {
+    return CATEGORY_TITLES[mediaType].get(categoryType);
+  }
 
   getData(mediaType: MediaTypesEnum, categoryType: CategoriesEnum, params?: Params): Observable<PagebleDto<MediaDto>> {
     const service = this.SERVICES[mediaType];

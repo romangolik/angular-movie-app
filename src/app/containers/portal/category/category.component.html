@@ -3,5 +3,11 @@
     <header class="listing__header">
       <p class="listing__title large-text">{{title}}</p>
     </header>
+    <div class="listing__content">
+      <app-media-list 
+        [data]="mediaList"
+        [canLoadMore]="canLoadMore"
+        (loadMoreAction)="loadMore()"></app-media-list>
+    </div>
   </section>
 </div>
