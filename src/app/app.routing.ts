@@ -5,10 +5,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./containers/portal/portal.module').then(u => u.PortalModule)
-  },
-  {
-    path: '**',
-    loadChildren: () => import('./containers/not-found-page/not-found-page.module').then(u => u.NotFoundPageModule)
   }
 ];
 
