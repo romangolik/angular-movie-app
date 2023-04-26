@@ -42,7 +42,7 @@ export class HttpService extends HttpClient {
       .pipe(
         map(response => {
           const data = dataField ? response[dataField] : response;
-          return DtoClass ? data.map(responseItem => new DtoClass(responseItem)) : response
+          return DtoClass ? data.map(responseItem => new DtoClass(responseItem)) : response;
         })
       );
   }
