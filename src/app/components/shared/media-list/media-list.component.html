@@ -1,0 +1,41 @@
+<ul
+  #list
+  class="media-list">
+  <ng-container *ngIf="data; else previewCardsTemplate">
+    <li
+      *ngFor="let item of data; trackBy: identify"
+      class="media-list__item">
+      <app-media-card [data]="item"></app-media-card>
+    </li>
+    <div 
+      #listLoadTrigger
+      [ngStyle]="{'height': positionToLoad}"
+      class="media-list__load-trigger"></div>
+  </ng-container>
+  <ng-template #previewCardsTemplate>
+    <li
+      *ngFor="let item of previewCards" 
+      class="card card_preview listing__preview-card media-list__item">
+      <div class="card__info">
+        <span class="card__preview-item card__rating"></span>
+        <span class="card__preview-item card__title"></span>
+      </div>
+    </li>
+  </ng-template>
+</ul>
+<div 
+  *ngIf="canLoadMore" 
+  class="media-list__loader-container">
+  <svg class="media-list__loader" xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" stroke="#2196f3">
+    <g fill="none" fill-rule="evenodd" stroke-width="2">
+      <circle cx="22" cy="22" r="1">
+        <animate attributeName="r" begin="0s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate>
+        <animate attributeName="stroke-opacity" begin="0s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"></animate>
+      </circle>
+      <circle cx="22" cy="22" r="1">
+        <animate attributeName="r" begin="-0.9s" dur="1.8s" values="1; 20" calcMode="spline" keyTimes="0; 1" keySplines="0.165, 0.84, 0.44, 1" repeatCount="indefinite"></animate>
+        <animate attributeName="stroke-opacity" begin="-0.9s" dur="1.8s" values="1; 0" calcMode="spline" keyTimes="0; 1" keySplines="0.3, 0.61, 0.355, 1" repeatCount="indefinite"></animate>
+      </circle>
+    </g>
+  </svg>
+</div>

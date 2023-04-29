@@ -1,5 +1,7 @@
 @import "assets/styles/abstracts/variables.scss";
+
 @import "assets/styles/utilities/animations.scss";
+
 @import "assets/styles/components/badge.scss";
 @import "assets/styles/components/button.scss";
 @import "assets/styles/components/link.scss";
@@ -9,5 +11,6 @@
 @import "assets/styles/components/page.scss";
 
 html {
+  scroll-behavior: smooth;
   background-color: #1D1D1D;;
 }

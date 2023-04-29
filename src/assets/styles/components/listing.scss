@@ -11,14 +11,15 @@
 
   &__preview-card {
     width: 292px;
-    height: 440px;
-  
+
+    aspect-ratio: 73/110;
     background-color: var(--dark-gray);
   }
 
   &__carousel-item {
     width: 292px;
-    height: 440px;
+
+    aspect-ratio: 73/110;
   }
 
   &_carousel {
