@@ -25,7 +25,7 @@
               [routerLink]="[movie.media_type, movie.id]"
               [showWatchNowButton]="true">
               <img 
-                appMediaCardImage 
+                appMediaCardImage
                 [alt]="movie.title"
                 [src]="movie.poster_path | getImageLink : 'w780'" >
               <h4 appMediaCardHeading>{{ movie.title }}</h4>
