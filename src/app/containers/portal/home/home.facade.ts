@@ -27,7 +27,7 @@ export class HomeFacade {
       map(data => data.results),
       switchMap(
         movies => this.genresService.getMovieList().pipe(
-          map(allGenres => movies.map(movie => ({
+          map(allGenres => movies.map(movie => new MediaDto({
             ...movie,
             genres: this.genresService.getByIds(movie.genre_ids, allGenres)
           })))
