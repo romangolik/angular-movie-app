@@ -6,7 +6,14 @@
     class="link card__image"
     [href]="routerLink"
     [routerLink]="routerLink">
-    <ng-content select="[appMediaCardImage]"></ng-content>
+    <ng-content 
+      *ngIf="hasImageSrc"
+      select="[appMediaCardImage]"></ng-content>
+    <svg 
+      *ngIf="!hasImageSrc"
+      class="card__image-default">
+      <use xlink:href="assets/icons/sprite.svg#default-image-icon"></use>
+    </svg>
   </a>
   <div class="card__content">
     <div class="card__info">

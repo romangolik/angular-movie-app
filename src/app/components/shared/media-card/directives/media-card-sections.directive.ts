@@ -4,7 +4,7 @@ import {Directive, ElementRef} from '@angular/core';
   selector: '[appMediaCardImage]',
   host: {
     'class': 'card__image-picture',
-    '[loading]': '"lazy"'
+    '[loading]': '"lazy"',
   },
 })
 export class MediaCardImage {

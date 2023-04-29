@@ -20,7 +20,15 @@ export class MediaCardComponent {
   @ContentChild(MediaCardImage, {descendants: true})
   set image(value: MediaCardImage) {
     if (value) {
-      fromEvent(value._elementRef.nativeElement, 'load')
+      const nativeElement = value._elementRef.nativeElement;
+
+      this.hasImageSrc = !nativeElement.src.includes('default');
+
+      if (!this.hasImageSrc) {
+        this.imageLoaded();
+      }
+      
+      fromEvent(nativeElement, 'load')
         .pipe(take(1))
         .subscribe(() => {
           this.imageLoaded();
@@ -30,6 +38,7 @@ export class MediaCardComponent {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
+  hasImageSrc = true;
   isImageLoaded = false;
 
   imageLoaded(): void {
