@@ -1,7 +1,7 @@
 import { CategoriesEnum } from './categories.enum';
-import { MediaTypesEnum } from '@rest/media/_types/media-types.enum';
+import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 
-export const CATEGORY_TITLES: { [key in MediaTypesEnum] : Map<CategoriesEnum, string> } = {
+export const CATEGORY_TITLES: Partial<Record<MediaTypesEnum, Map<CategoriesEnum, string>>> = {
   [MediaTypesEnum.MOVIE]: new Map<CategoriesEnum, string>([
     [CategoriesEnum.Trending, 'Trending Movies'],
     [CategoriesEnum.Popular, 'Popular Movies'],

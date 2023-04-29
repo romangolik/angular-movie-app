@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MediaTypesEnum } from '@rest/media/_types/media-types.enum';
+import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
 
 const routes: Routes = [

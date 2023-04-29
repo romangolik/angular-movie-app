@@ -8,7 +8,7 @@ import { CategoriesService } from '@core/services/categories/categories.service'
 import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
-import { MediaTypesEnum } from '@rest/media/_types/media-types.enum';
+import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
 
 @Component({
@@ -17,7 +17,7 @@ import { CategoriesEnum } from '@core/services/categories/_data/categories.enum'
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit, OnDestroy {
-  $destroy = new Subject<void>();
+  private $destroy = new Subject<void>();
 
   title = '';
   currentPage = 1;

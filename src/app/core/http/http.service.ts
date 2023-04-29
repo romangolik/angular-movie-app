@@ -47,14 +47,31 @@ export class HttpService extends HttpClient {
       );
   }
 
+  getAllWithPagination<T>(url: string, params?: Params, DtoClass?: new (responseItem) => T): Observable<PagebleDto<T>>
+  getAllWithPagination<T>(url: string, params?: Params, converFunction?: (responseItem) => T): Observable<PagebleDto<T>>
   getAllWithPagination<T>(
     url: string,
     params?: Params,
-    DtoClass?: new (responseItem) => T
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    a?: Function
   ): Observable<PagebleDto<T>> {
+    if (!!a) {
+      return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
+        .pipe(
+          map(response => new PagebleDto({ ...response }))
+        );
+    }
+
+    if (a.name) {
+      return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
+        .pipe(
+          map(response => new PagebleDto({ ...response, DtoClass: a as new (responseItem) => T }))
+        );
+    }
+
     return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
       .pipe(
-        map(response => new PagebleDto({ ...response, DtoClass }))
+        map(response => new PagebleDto({ ...response, converFunction: a as (responseItem) => T }))
       );
   }
 

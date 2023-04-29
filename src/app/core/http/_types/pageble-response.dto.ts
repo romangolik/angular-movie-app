@@ -3,6 +3,7 @@ interface IPagebleDto<T> {
   page: number;
   total_pages: number;
   DtoClass?: new (contentItem) => T;
+  converFunction?: (responseItem) => T;
 }
 
 export class PagebleDto<T> {
@@ -10,6 +11,7 @@ export class PagebleDto<T> {
   page: number;
   total_pages: number;
   DtoClass?: new (contentItem) => T;
+  converFunction?: (responseItem) => T;
 
   constructor(data?: IPagebleDto<T>) {
     if (data) {

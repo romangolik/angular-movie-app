@@ -11,7 +11,7 @@ import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
 import { AllowedNames } from '@core/types/allowed-names.type';
-import { MediaTypesEnum } from '@rest/media/_types/media-types.enum';
+import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 import { CategoryServices } from './_types/category-services.type';
 import { AllowedServicesMethods } from './_types/allowed-services-methods.type';
 

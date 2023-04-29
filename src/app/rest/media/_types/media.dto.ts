@@ -1,6 +1,6 @@
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
-import { MediaTypesEnum } from './media-types.enum';
+import { MediaTypesEnum } from '../_data/media-types.enum';
 
 interface IMedia {
   adult: boolean;
