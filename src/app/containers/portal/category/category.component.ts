@@ -1,5 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { Subject, switchMap, takeUntil } from 'rxjs';
 
 import { CategoriesService } from '@core/services/categories/categories.service';
 
@@ -14,7 +16,9 @@ import { CategoriesEnum } from '@core/services/categories/_data/categories.enum'
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
+  $destroy = new Subject<void>();
+
   title = '';
   currentPage = 1;
   canLoadMore = false;
@@ -30,19 +34,20 @@ export class CategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(routeData => {
-      const { mediaType, categoryType } = routeData;
-      this.mediaType = mediaType;
-      this.categoryType = categoryType;
+    this.activatedRoute.data.pipe(
+      takeUntil(this.$destroy),
+      switchMap(({mediaType, categoryType}) => {
+        this.mediaType = mediaType;
+        this.categoryType = categoryType;
 
-      this.title = this.categoriesSevice.getTitle(mediaType, categoryType);
+        this.title = this.categoriesSevice.getTitle(mediaType, categoryType);
 
-      this.categoriesSevice.getData(mediaType, categoryType)
-        .subscribe(data => {
-          this.categoryData = data;
-          this.mediaList = data.results;
-          this.canLoadMore = this.currentPage !== data.total_pages;
-        });
+        return this.categoriesSevice.getData(mediaType, categoryType);
+      }))
+      .subscribe(data => {
+        this.categoryData = data;
+        this.mediaList = data.results;
+        this.canLoadMore = this.currentPage !== data.total_pages;
     });
   }
 
@@ -56,9 +61,15 @@ export class CategoryComponent implements OnInit {
       this.mediaType, 
       this.categoryType,
       params
-    ).subscribe(data => {
+    ).pipe(takeUntil(this.$destroy))
+    .subscribe(data => {
       this.mediaList = this.mediaList.concat(data.results);
       this.canLoadMore = this.currentPage !== data.total_pages;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.next();
+    this.$destroy.complete();
   }
 }
