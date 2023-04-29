@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { MoviesService } from '@rest/movies/movies.service';
 import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
 import { AllowedNames } from '@core/types/allowed-names.type';
@@ -52,7 +51,7 @@ export class CategoriesService {
     return CATEGORY_TITLES[mediaType].get(categoryType);
   }
 
-  getData(mediaType: MediaTypesEnum, categoryType: CategoriesEnum, params?: Params): Observable<PagebleDto<MediaDto>> {
+  getData(mediaType: MediaTypesEnum, categoryType: CategoriesEnum, params?: Params): Observable<PagebleDto<any>> {
     const service = this.SERVICES[mediaType];
     const methodName = this.CATEGORY_METHODS[mediaType].get(categoryType);
     return service[methodName](params);

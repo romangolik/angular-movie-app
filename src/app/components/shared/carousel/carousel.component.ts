@@ -170,6 +170,6 @@ export class CarouselComponent implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.intersectionObserver.disconnect();
+    this.intersectionObserver?.disconnect();
   }
 }

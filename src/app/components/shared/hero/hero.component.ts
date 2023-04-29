@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
+
+type MediaType = (ShortMovieDto | ShortTvShowDto);
 
 @Component({
   selector: 'app-hero',
@@ -10,8 +13,21 @@ import { MediaDto } from '@rest/media/_types/media.dto';
 })
 export class HeroComponent {
   @Input() hideInfo = false;
-  @Input() mediaData: MediaDto;
+  @Input()
+  set data(value: MediaType ) {
+    if (value) {
+      this.title = value instanceof ShortMovieDto ? value.title : value.name;
+      this._data = value;
+    }
+  }
+  get data(): MediaType {
+    return this._data;
+  }
 
+  private _data: MediaType;
+  
+  title: string;
+  
   imageLoaded = false;
 
   imageLoadHandler(): void {

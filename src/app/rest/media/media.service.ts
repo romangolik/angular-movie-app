@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '@core/http/http.service';
 
-import { MediaDto } from './_types/media.dto';
+import { MediaDto } from './_types/media.interface';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
 @Injectable()

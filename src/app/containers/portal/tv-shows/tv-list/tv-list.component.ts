@@ -4,7 +4,7 @@ import { Observable, take } from 'rxjs';
 
 import { TvListFacade } from './tv-list.facade';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
 @Component({
   selector: 'app-tv-list',
@@ -12,18 +12,18 @@ import { MediaDto } from '@rest/media/_types/media.dto';
   styleUrls: ['./tv-list.component.scss']
 })
 export class TvListComponent implements OnInit {
-  $sliderItems: Observable<MediaDto[]>;
-  $popularMovies: Observable<MediaDto[]>;
-  $topRatedMovies: Observable<MediaDto[]>;
-  $currentlyAiring: Observable<MediaDto[]>;
-  $airingToday: Observable<MediaDto[]>;
+  $sliderItems: Observable<ShortTvShowDto[]>;
+  $popular: Observable<ShortTvShowDto[]>;
+  $topRated: Observable<ShortTvShowDto[]>;
+  $currentlyAiring: Observable<ShortTvShowDto[]>;
+  $airingToday: Observable<ShortTvShowDto[]>;
 
   constructor(private facade: TvListFacade) {}
 
   ngOnInit(): void {
     this.$sliderItems = this.facade.getTrending().pipe(take(5));
-    this.$popularMovies = this.facade.getPopular();
-    this.$topRatedMovies = this.facade.getTopRated();
+    this.$popular = this.facade.getPopular();
+    this.$topRated = this.facade.getTopRated();
     this.$currentlyAiring = this.facade.getCurrentlyAiring();
     this.$airingToday = this.facade.getAiringToday();
   }

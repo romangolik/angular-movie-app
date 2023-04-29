@@ -9,6 +9,7 @@ import { CarouselModule } from '@components/shared/carousel/carousel.module';
 import { TvListlRouting } from './tv-list.routing';
 import { MediaCardModule } from '@components/shared/media-card/media-card.module';
 import { HeroSliderModule } from '@components/shared/hero-slider/hero-slider.module';
+import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
 import { TvListComponent } from './tv-list.component';
 
@@ -19,6 +20,7 @@ import { TvListComponent } from './tv-list.component';
     TvListlRouting,
     MediaCardModule,
     HeroSliderModule,
+    GetImageLinkModule,
   ],
   declarations: [ TvListComponent ],
   exports: [ TvListComponent ],

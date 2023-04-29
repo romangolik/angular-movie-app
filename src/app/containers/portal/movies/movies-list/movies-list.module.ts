@@ -9,6 +9,7 @@ import { CarouselModule } from '@components/shared/carousel/carousel.module';
 import { MediaCardModule } from '@components/shared/media-card/media-card.module';
 import { HeroSliderModule } from '@components/shared/hero-slider/hero-slider.module';
 import { MoviesListlRouting } from './movies-list.routing';
+import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
 import { MoviesListComponent } from './movies-list.component';
 
@@ -18,6 +19,7 @@ import { MoviesListComponent } from './movies-list.component';
     CarouselModule,
     MediaCardModule,
     HeroSliderModule,
+    GetImageLinkModule,
     MoviesListlRouting,
   ],
   declarations: [ MoviesListComponent ],

@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '@core/http/http.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
+import { ShortTvShowDto } from './_types/short-tv-show.dto';
 
 @Injectable()
 export class TvShowsService {
@@ -14,43 +14,43 @@ export class TvShowsService {
 
   constructor(private http: HttpService) { }
 
-  getTrending(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getTrending(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.http.getAllWithPagination<ShortTvShowDto>(
       'api/trending/tv/week',
       params,
-      MediaDto,
+      ShortTvShowDto,
     );
   }
 
-  getPopular(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getPopular(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.http.getAllWithPagination<ShortTvShowDto>(
       `${this.path}/popular`,
       params,
-      MediaDto,
+      ShortTvShowDto,
     );
   }
 
-  getTopRated(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getTopRated(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.http.getAllWithPagination<ShortTvShowDto>(
       `${this.path}/top_rated`,
       params,
-      MediaDto,
+      ShortTvShowDto,
     );
   }
 
-  getCurrentlyAiring(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getCurrentlyAiring(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.http.getAllWithPagination<ShortTvShowDto>(
       `${this.path}/on_the_air`,
       params,
-      MediaDto,
+      ShortTvShowDto,
     );
   }
 
-  getAiringToday(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getAiringToday(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.http.getAllWithPagination<ShortTvShowDto>(
       `${this.path}/airing_today`,
       params,
-      MediaDto,
+      ShortTvShowDto,
     );
   }
 }

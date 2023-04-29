@@ -20,7 +20,16 @@
           <app-carousel-item 
             *ngFor="let movie of $trendingMovies | async"
             class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
+            <app-media-card  
+              [voteAverage]="movie.vote_average"
+              [routerLink]="[movie.media_type, movie.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="movie.title"
+                [src]="movie.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ movie.title }}</h4>
+            </app-media-card>
           </app-carousel-item>
         </app-carousel>
       </div>
@@ -41,7 +50,16 @@
         <app-carousel-item 
           *ngFor="let tvShow of $trendingTVShows | async"
           class="listing__carousel-item">
-          <app-media-card [data]="tvShow"></app-media-card>
+          <app-media-card  
+            [voteAverage]="tvShow.vote_average"
+            [routerLink]="[tvShow.media_type, tvShow.id]"
+            [showWatchNowButton]="true">
+            <img 
+              appMediaCardImage 
+              [alt]="tvShow.name"
+              [src]="tvShow.poster_path | getImageLink : 'w780'" >
+            <h4 appMediaCardHeading>{{ tvShow.name }}</h4>
+          </app-media-card>
         </app-carousel-item>
       </app-carousel>
     </section>

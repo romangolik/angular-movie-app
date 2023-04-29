@@ -5,7 +5,30 @@
     <li
       *ngFor="let item of data; trackBy: identify"
       class="media-list__item">
-      <app-media-card [data]="item"></app-media-card>
+      <ng-container *ngIf="item | instanceof: ShortMovieDto as item">
+        <app-media-card  
+          [voteAverage]="item.vote_average"
+          [routerLink]="[item.media_type, item.id]"
+          [showWatchNowButton]="true">
+          <img 
+            appMediaCardImage 
+            [alt]="item.title"
+            [src]="item.poster_path | getImageLink : 'w780'" >
+          <h4 appMediaCardHeading>{{ item.title }}</h4>
+        </app-media-card>
+      </ng-container>
+      <ng-container *ngIf="item | instanceof: ShortTvShowDto as item">
+        <app-media-card  
+          [voteAverage]="item.vote_average"
+          [routerLink]="[item.media_type, item.id]"
+          [showWatchNowButton]="true">
+          <img 
+            appMediaCardImage 
+            [alt]="item.name"
+            [src]="item.poster_path | getImageLink : 'w780'" >
+          <h4 appMediaCardHeading>{{ item.name }}</h4>
+        </app-media-card>
+      </ng-container>
     </li>
     <div 
       #listLoadTrigger

@@ -7,7 +7,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { GenresService } from '@rest/genres/genres.service';
 import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
 @Injectable()
 export class TvListFacade {
@@ -16,7 +16,7 @@ export class TvListFacade {
     private tvShowsService: TvShowsService,
   ) {}
 
-  getTrending(params?: Params): Observable<MediaDto[]> {
+  getTrending(params?: Params): Observable<ShortTvShowDto[]> {
     return this.tvShowsService.getTrending({
       'language': 'en-US',
       'page': '1',
@@ -34,7 +34,7 @@ export class TvListFacade {
     );
   }
 
-  getPopular(params?: Params): Observable<MediaDto[]> {
+  getPopular(params?: Params): Observable<ShortTvShowDto[]> {
     return this.tvShowsService.getPopular({
       'language': 'en-US',
       'page': '1',
@@ -42,7 +42,7 @@ export class TvListFacade {
     }).pipe(map(data => data.results));
   }
 
-  getTopRated(params?: Params): Observable<MediaDto[]> {
+  getTopRated(params?: Params): Observable<ShortTvShowDto[]> {
     return this.tvShowsService.getTopRated({
       'language': 'en-US',
       'page': '1',
@@ -50,7 +50,7 @@ export class TvListFacade {
     }).pipe(map(data => data.results));
   }
 
-  getCurrentlyAiring(params?: Params): Observable<MediaDto[]> {
+  getCurrentlyAiring(params?: Params): Observable<ShortTvShowDto[]> {
     return this.tvShowsService.getCurrentlyAiring({
       'language': 'en-US',
       'page': '1',
@@ -58,7 +58,7 @@ export class TvListFacade {
     }).pipe(map(data => data.results));
   }
 
-  getAiringToday(params?: Params): Observable<MediaDto[]> {
+  getAiringToday(params?: Params): Observable<ShortTvShowDto[]> {
     return this.tvShowsService.getAiringToday({
       'language': 'en-US',
       'page': '1',

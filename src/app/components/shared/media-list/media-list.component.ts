@@ -5,13 +5,17 @@ import {
   Inject,
   Component, 
   ViewChild,
+  OnDestroy,
   ElementRef, 
   EventEmitter, 
   ChangeDetectionStrategy,
-  OnDestroy,
 } from '@angular/core';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
+import { ShortPersonDto } from '@rest/persons/_type/short-person.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
+
+type MediaType = ShortMovieDto | ShortTvShowDto | ShortPersonDto;
 
 @Component({
   selector: 'app-media-list',
@@ -27,7 +31,7 @@ export class MediaListComponent implements OnDestroy {
     }
   }
 
-  @Input() data: MediaDto[];
+  @Input() data: MediaType[];
   @Input() positionToLoad = '500px';
   @Input()
   set canLoadMore(value: boolean) {
@@ -46,11 +50,13 @@ export class MediaListComponent implements OnDestroy {
 
   intersectionObserver: IntersectionObserver;
 
+  ShortMovieDto = ShortMovieDto;
+  ShortTvShowDto = ShortTvShowDto;
   previewCards = new Array(20).fill(0);
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  identify(index: number, item: MediaDto): number {
+  identify(index: number, item: MediaType): number {
     return item.id;
   }
 

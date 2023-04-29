@@ -5,7 +5,6 @@ import { Subject, switchMap, takeUntil } from 'rxjs';
 
 import { CategoriesService } from '@core/services/categories/categories.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
 import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
@@ -23,10 +22,10 @@ export class CategoryComponent implements OnInit, OnDestroy {
   currentPage = 1;
   canLoadMore = false;
   
-  mediaList: MediaDto[];
+  mediaList: any[];
   mediaType: MediaTypesEnum;
   categoryType: CategoriesEnum;
-  categoryData: PagebleDto<MediaDto>;
+  categoryData: PagebleDto<any>;
 
   constructor(
     private activatedRoute: ActivatedRoute,

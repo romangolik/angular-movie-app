@@ -1,21 +1,13 @@
+import { IMedia } from '@rest/media/_types/media.interface';
+
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
 import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 
-interface IShortTvShow {
-  poster_path: string | null;
-  popularity: number;
-  id: number;
-  overview: string;
-  backdrop_path: string | null;
-  vote_average: number;
+interface IShortTvShow extends IMedia {
   media_type: MediaTypesEnum.TV;
   first_air_date: string;
   origin_country: string[];
-  genre_ids: number[];
-  genres: GenreDto[];
-  original_language: string;
-  vote_count: number;
   original_name: string;
   name: string;
 }

@@ -7,7 +7,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { MoviesService } from '@rest/movies/movies.service';
 import { GenresService } from '@rest/genres/genres.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
 
 @Injectable()
 export class MoviesListFacade {
@@ -16,7 +16,7 @@ export class MoviesListFacade {
     private genresService: GenresService,
   ) {}
 
-  getTrending(params?: Params): Observable<MediaDto[]> {
+  getTrending(params?: Params): Observable<ShortMovieDto[]> {
     return this.moviesService.getTrending({
       'language': 'en-US',
       'page': '1',
@@ -34,7 +34,7 @@ export class MoviesListFacade {
     );
   }
 
-  getPopular(params?: Params): Observable<MediaDto[]> {
+  getPopular(params?: Params): Observable<ShortMovieDto[]> {
     return this.moviesService.getPopular({
       'language': 'en-US',
       'page': '1',
@@ -42,7 +42,7 @@ export class MoviesListFacade {
     }).pipe(map(data => data.results));
   }
 
-  getTopRated(params?: Params): Observable<MediaDto[]> {
+  getTopRated(params?: Params): Observable<ShortMovieDto[]> {
     return this.moviesService.getTopRated({
       'language': 'en-US',
       'page': '1',
@@ -50,7 +50,7 @@ export class MoviesListFacade {
     }).pipe(map(data => data.results));
   }
 
-  getUpcoming(params?: Params): Observable<MediaDto[]> {
+  getUpcoming(params?: Params): Observable<ShortMovieDto[]> {
     return this.moviesService.getUpcoming({
       'language': 'en-US',
       'page': '1',
@@ -58,7 +58,7 @@ export class MoviesListFacade {
     }).pipe(map(data => data.results));
   }
 
-  getNowPlaying(params?: Params): Observable<MediaDto[]> {
+  getNowPlaying(params?: Params): Observable<ShortMovieDto[]> {
     return this.moviesService.getNowPlaying({
       'language': 'en-US',
       'page': '1',

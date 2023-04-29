@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Observable, tap } from 'rxjs';
+
 import { HomeFacade } from '@portal/home/home.facade';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
-import { Observable, tap } from 'rxjs';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +13,10 @@ import { Observable, tap } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  movies: MediaDto[];
-  tvShows: MediaDto[];
-  sliderItems: MediaDto[];
+  sliderItems: ShortMovieDto[];
 
-  $trendingMovies: Observable<MediaDto[]>;
-  $trendingTVShows: Observable<MediaDto[]>;
+  $trendingMovies: Observable<ShortMovieDto[]>;
+  $trendingTVShows: Observable<ShortTvShowDto[]>;
 
   constructor(private facade: HomeFacade) { }
 

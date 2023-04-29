@@ -1,22 +1,18 @@
 <div 
   class="card media-card"
-  [class.loaded]="isImageLoaded">
+  [class.loaded]="isImageLoaded"
+  [class.media-card__watch-now]="showWatchNowButton">
   <a
     class="link card__image"
-    [href]="[data.media_type, data.id]"
-    [routerLink]="[data.media_type, data.id]">
-    <img
-      class="card__image-picture"
-      loading="lazy"
-      [alt]="data.title"
-      [src]="data.poster_path | getImageLink : 'w780'"
-      (load)="imageLoaded()"
-  />
+    [href]="routerLink"
+    [routerLink]="routerLink">
+    <ng-content select="[appMediaCardImage]"></ng-content>
   </a>
   <div class="card__content">
     <div class="card__info">
       <div 
-        [ngStyle]="{ '--rating': data.vote_average }" 
+        *ngIf="voteAverage !== undefined"
+        [ngStyle]="{ '--rating': voteAverage }" 
         class="rating media-card__rating">
         <div class="rating__stars">
           <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
@@ -26,12 +22,15 @@
           <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
         </div>
       </div>
-      <h4 class="card__title">{{ data.title }}</h4>
+
+      <ng-content select="[appMediaCardHeading]"></ng-content>
+      <ng-content select="[appMediaCardParagraph]"></ng-content>
     </div>
     <a
+      *ngIf="showWatchNowButton"
       class="link media-card__link"
-      [href]="[data.media_type, data.id]"
-      [routerLink]="[data.media_type, data.id]">
+      [href]="routerLink"
+      [routerLink]="routerLink">
       <span class="link__text">Watch now</span>
       <svg class="link__icon">
         <use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use>

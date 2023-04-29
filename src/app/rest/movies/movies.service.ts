@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '@core/http/http.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
+import { ShortMovieDto } from './_types/short-movie.dto';
 
 @Injectable()
 export class MoviesService {
@@ -14,43 +14,43 @@ export class MoviesService {
 
   constructor(private http: HttpService) { }
 
-  getTrending(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getTrending(params?: Params): Observable<PagebleDto<ShortMovieDto>> {
+    return this.http.getAllWithPagination<ShortMovieDto>(
       'api/trending/movie/week',
       params,
-      MediaDto,
+      ShortMovieDto,
     );
   }
 
-  getPopular(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getPopular(params?: Params): Observable<PagebleDto<ShortMovieDto>> {
+    return this.http.getAllWithPagination<ShortMovieDto>(
       `${this.path}/popular`,
       params,
-      MediaDto,
+      ShortMovieDto,
     );
   }
 
-  getTopRated(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getTopRated(params?: Params): Observable<PagebleDto<ShortMovieDto>> {
+    return this.http.getAllWithPagination<ShortMovieDto>(
       `${this.path}/top_rated`,
       params,
-      MediaDto,
+      ShortMovieDto,
     );
   }
 
-  getUpcoming(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getUpcoming(params?: Params): Observable<PagebleDto<ShortMovieDto>> {
+    return this.http.getAllWithPagination<ShortMovieDto>(
       `${this.path}/upcoming`,
       params,
-      MediaDto,
+      ShortMovieDto,
     );
   }
 
-  getNowPlaying(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
+  getNowPlaying(params?: Params): Observable<PagebleDto<ShortMovieDto>> {
+    return this.http.getAllWithPagination<ShortMovieDto>(
       `${this.path}/now_playing`,
       params,
-      MediaDto,
+      ShortMovieDto,
     );
   }
 }

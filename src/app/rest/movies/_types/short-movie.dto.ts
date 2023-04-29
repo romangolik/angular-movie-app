@@ -1,24 +1,17 @@
+import { IMedia } from '@rest/media/_types/media.interface';
+
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
 import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 
-interface IShortMovie {
-  poster_path: string | null;
+interface IShortMovie extends IMedia {
   adult: boolean;
   overview: string;
   release_date: string;
   original_title: string;
-  genre_ids: number[];
-  genres: GenreDto[];
-  id: number;
   media_type: MediaTypesEnum.MOVIE;
-  original_language: string;
   title: string;
-  backdrop_path: string | null;
-  popularity: number;
-  vote_count: number;
   video: boolean;
-  vote_average: number;
 }
 
 export class ShortMovieDto implements IShortMovie {
