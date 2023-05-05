@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, Input } from '@angular/core';
 
-import { fromEvent, take } from 'rxjs';
-
 import { MediaCardImage } from './directives/media-card-sections.directive';
 
 @Component({
@@ -11,8 +9,6 @@ import { MediaCardImage } from './directives/media-card-sections.directive';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaCardComponent {
-  @Input() data: any;
-
   @Input() routerLink: string | any[];
   @Input() voteAverage: number;
   @Input() showWatchNowButton = false;
@@ -24,22 +20,19 @@ export class MediaCardComponent {
 
       this.hasImageSrc = !nativeElement.src.includes('default');
 
-      if (!this.hasImageSrc) {
+      if (this.hasImageSrc) {
+        value.loaded$
+          .subscribe(() => this.imageLoaded());
+      } else {
         this.imageLoaded();
       }
-      
-      fromEvent(nativeElement, 'load')
-        .pipe(take(1))
-        .subscribe(() => {
-          this.imageLoaded();
-        });
     }
   }
 
-  constructor(private cdr: ChangeDetectorRef) {}
-
   hasImageSrc = true;
   isImageLoaded = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   imageLoaded(): void {
     this.isImageLoaded = true;
