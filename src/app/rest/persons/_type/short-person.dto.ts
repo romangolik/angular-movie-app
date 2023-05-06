@@ -1,19 +1,19 @@
-import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
-import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
+import { IShortMovie, ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
+import { IShortTvShow, ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
-import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
+import { MediaTypesEnum } from '@core/enums/media-types.enum';
 
 interface IShortPerson {
   profile_path: string | null;
   adult: boolean;
   id: number;
   media_type: MediaTypesEnum.PERSON;
-  known_for: (ShortMovieDto | ShortTvShowDto)[];
+  known_for: (IShortMovie | IShortTvShow)[];
   name: string;
   popularity: number;
 }
 
-export class ShortPersonDto implements IShortPerson {
+export class ShortPersonDto {
   profile_path: string | null;
   adult: boolean;
   id: number;

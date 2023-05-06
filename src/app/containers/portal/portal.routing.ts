@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('./tv-shows/tv-shows.module').then(u => u.TvShowsModule)
       },
       {
+        path: 'search',
+        loadChildren: () => import('./search-page/search-page.module').then(u => u.SearchPageModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('./not-found-page/not-found-page.module').then(u => u.NotFoundPageModule)
       }

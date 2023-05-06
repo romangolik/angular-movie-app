@@ -7,7 +7,7 @@ import { MoviesService } from '@rest/movies/movies.service';
 
 import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
 
-import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
+import { MediaTypesEnum } from '@core/enums/media-types.enum';
 
 import { BaseCategoryComponent } from '@core/basic-classes/base-category.component';
 
@@ -39,14 +39,13 @@ export class MovieCategoryComponent extends BaseCategoryComponent<ShortMovieDto>
       .subscribe(data => {
         this.categoryData = data;
         this.mediaList = data.results;
-        this.canLoadMore = this.currentPage !== data.total_pages;
+        this.canLoadMore = data.page !== data.total_pages;
       });
   }
 
   loadMore(): void {
-    this.currentPage++;
     const params = {
-      page: this.currentPage
+      page: this.categoryData.page + 1
     };
 
     this.moviesService.getDataByCategory(
@@ -55,8 +54,9 @@ export class MovieCategoryComponent extends BaseCategoryComponent<ShortMovieDto>
     )
       .pipe(takeUntil(this.$destroy))
       .subscribe(data => {
+        this.categoryData = data;
         this.mediaList = this.mediaList.concat(data.results);
-        this.canLoadMore = this.currentPage !== data.total_pages;
+        this.canLoadMore = data.page !== data.total_pages;
       });
   }
 }

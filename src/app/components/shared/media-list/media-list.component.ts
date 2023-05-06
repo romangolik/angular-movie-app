@@ -11,6 +11,7 @@ import {
   EventEmitter, 
   ContentChildren,
   AfterContentInit,
+  ChangeDetectorRef,
   ChangeDetectionStrategy,
 } from '@angular/core';
 
@@ -53,7 +54,10 @@ export class MediaListComponent implements AfterContentInit, OnDestroy {
   ShortTvShowDto = ShortTvShowDto;
   previewCards = new Array(20).fill(0);
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
 
   ngAfterContentInit(): void {
     this.listItems.changes
@@ -63,6 +67,7 @@ export class MediaListComponent implements AfterContentInit, OnDestroy {
           this.initIntersectionObserver(this.listLoadTrigger);
         }
         this.previewCards = [];
+        this.cdr.markForCheck();
       });
   }
 

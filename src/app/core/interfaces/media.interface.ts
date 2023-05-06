@@ -1,6 +1,6 @@
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
-import { MediaTypesEnum } from '../_data/media-types.enum';
+import { MediaTypesEnum } from '../enums/media-types.enum';
 
 export interface IMedia {
   backdrop_path: string;

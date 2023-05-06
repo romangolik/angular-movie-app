@@ -7,7 +7,7 @@ import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
 import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
-import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
+import { MediaTypesEnum } from '@core/enums/media-types.enum';
 
 import { BaseCategoryComponent } from '@core/basic-classes/base-category.component';
 
@@ -39,14 +39,13 @@ export class TvShowCategoryComponent extends BaseCategoryComponent<ShortTvShowDt
       .subscribe(data => {
         this.categoryData = data;
         this.mediaList = data.results;
-        this.canLoadMore = this.currentPage !== data.total_pages;
+        this.canLoadMore = data.page !== data.total_pages;
       });
   }
 
   loadMore(): void {
-    this.currentPage++;
     const params = {
-      page: this.currentPage
+      page: this.categoryData.page + 1
     };
 
     this.tvShowsService.getDataByCategory(
@@ -55,8 +54,9 @@ export class TvShowCategoryComponent extends BaseCategoryComponent<ShortTvShowDt
     )
       .pipe(takeUntil(this.$destroy))
       .subscribe(data => {
+        this.categoryData = data;
         this.mediaList = this.mediaList.concat(data.results);
-        this.canLoadMore = this.currentPage !== data.total_pages;
+        this.canLoadMore = data.page !== data.total_pages;
       });
   }
 }

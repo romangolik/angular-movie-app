@@ -1,10 +1,10 @@
-import { IMedia } from '@rest/media/_types/media.interface';
+import { IMedia } from '@core/interfaces/media.interface';
 
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
-import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
+import { MediaTypesEnum } from '@core/enums/media-types.enum';
 
-interface IShortMovie extends IMedia {
+export interface IShortMovie extends IMedia {
   adult: boolean;
   overview: string;
   release_date: string;
