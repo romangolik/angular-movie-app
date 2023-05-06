@@ -6,7 +6,7 @@ import { MovieslRouting } from './movies.routing';
 @NgModule({
   imports: [
     CommonModule,
-    MovieslRouting
-  ],
+    MovieslRouting,
+  ]
 })
 export class MoviesModule { }

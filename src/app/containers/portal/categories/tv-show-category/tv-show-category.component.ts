@@ -3,45 +3,45 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subject, switchMap, takeUntil } from 'rxjs';
 
+import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 import { CategoriesService } from '@core/services/categories/categories.service';
 
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
 import { MediaTypesEnum } from '@rest/media/_data/media-types.enum';
 import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.scss']
+  selector: 'app-tv-show-category',
+  templateUrl: './tv-show-category.component.html',
+  styleUrls: ['./tv-show-category.component.scss']
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class TvShowCategoryComponent implements OnInit, OnDestroy {
   private $destroy = new Subject<void>();
 
   title = '';
   currentPage = 1;
   canLoadMore = false;
   
-  mediaList: any[];
-  mediaType: MediaTypesEnum;
+  mediaList: ShortTvShowDto[];
   categoryType: CategoriesEnum;
-  categoryData: PagebleDto<any>;
+  categoryData: PagebleDto<ShortTvShowDto>;
 
   constructor(
+    private tvShowsService: TvShowsService,
     private activatedRoute: ActivatedRoute,
-    private categoriesSevice: CategoriesService
+    private categoriesService: CategoriesService,
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.pipe(
+    this.activatedRoute.params.pipe(
       takeUntil(this.$destroy),
-      switchMap(({mediaType, categoryType}) => {
-        this.mediaType = mediaType;
+      switchMap(({categoryType}) => {
         this.categoryType = categoryType;
+        this.title = this.categoriesService.getTitle(MediaTypesEnum.TV, categoryType);
 
-        this.title = this.categoriesSevice.getTitle(mediaType, categoryType);
-
-        return this.categoriesSevice.getData(mediaType, categoryType);
+        return this.tvShowsService.getDataByCategory(categoryType);
       }))
       .subscribe(data => {
         this.categoryData = data;
@@ -50,21 +50,24 @@ export class CategoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  trackBy(index: number, item: ShortTvShowDto): number {
+    return item.id;
+  }
+
   loadMore(): void {
     this.currentPage++;
     const params = {
       page: this.currentPage
     };
 
-    this.categoriesSevice.getData(
-      this.mediaType, 
+    this.tvShowsService.getDataByCategory(
       this.categoryType,
       params
     ).pipe(takeUntil(this.$destroy))
-    .subscribe(data => {
-      this.mediaList = this.mediaList.concat(data.results);
-      this.canLoadMore = this.currentPage !== data.total_pages;
-    });
+      .subscribe(data => {
+        this.mediaList = this.mediaList.concat(data.results);
+        this.canLoadMore = this.currentPage !== data.total_pages;
+      });
   }
 
   ngOnDestroy(): void {

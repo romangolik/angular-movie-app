@@ -10,14 +10,13 @@ import {
   ElementRef, 
   EventEmitter, 
   ContentChildren,
-  ChangeDetectionStrategy,
   AfterContentInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 
 import { take } from 'rxjs';
 
 import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
-import { ShortPersonDto } from '@rest/persons/_type/short-person.dto';
 import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
 import { MediaListItemComponent } from './media-list-item/media-list-item.component';
@@ -29,12 +28,7 @@ import { MediaListItemComponent } from './media-list-item/media-list-item.compon
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaListComponent implements AfterContentInit, OnDestroy {
-  @ViewChild('listLoadTrigger')
-  set listLoadTrigger(value: ElementRef) {
-    if (value && this._canLoadMore) {
-      this.initIntersectionObserver(value);
-    }
-  }
+  @ViewChild('listLoadTrigger') listLoadTrigger: ElementRef;
   @ContentChildren(MediaListItemComponent) listItems: QueryList<MediaListItemComponent>;
 
   @Input() positionToLoad = '500px';
@@ -64,7 +58,12 @@ export class MediaListComponent implements AfterContentInit, OnDestroy {
   ngAfterContentInit(): void {
     this.listItems.changes
       .pipe(take(1))
-      .subscribe(() => this.previewCards = []);
+      .subscribe(() => {
+        if (this.listLoadTrigger && this.canLoadMore) {
+          this.initIntersectionObserver(this.listLoadTrigger);
+        }
+        this.previewCards = [];
+      });
   }
 
   initIntersectionObserver(target: ElementRef): void {

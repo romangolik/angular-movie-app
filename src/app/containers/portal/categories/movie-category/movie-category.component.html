@@ -1,0 +1,25 @@
+<div class="catehory-page">
+  <section class="listing">
+    <header class="listing__header">
+      <p class="listing__title large-text">{{title}}</p>
+    </header>
+    <div class="listing__content">
+      <app-media-list 
+        [canLoadMore]="canLoadMore"
+        (loadMoreAction)="loadMore()">
+        <app-media-list-item *ngFor="let item of mediaList; trackBy:trackBy">
+          <app-media-card  
+            [voteAverage]="item.vote_average"
+            [routerLink]="[item.media_type, item.id]"
+            [showWatchNowButton]="true">
+            <img 
+              appMediaCardImage 
+              [alt]="item.title"
+              [src]="item.poster_path | getImageLink : 'w780'" >
+            <h4 appMediaCardHeading>{{ item.title }}</h4>
+          </app-media-card>
+        </app-media-list-item>
+      </app-media-list>
+    </div>
+  </section>
+</div>

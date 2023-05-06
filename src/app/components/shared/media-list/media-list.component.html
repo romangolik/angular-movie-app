@@ -8,6 +8,10 @@
       <span class="card__preview-item card__title"></span>
     </div>
   </li>
+  <div 
+    #listLoadTrigger
+    [ngStyle]="{'height': positionToLoad}"
+    class="media-list__load-trigger"></div>
 </ul>
 <div 
   *ngIf="canLoadMore" 

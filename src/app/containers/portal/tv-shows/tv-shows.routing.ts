@@ -19,39 +19,8 @@ const routes: Routes = [
         },
         children: [
           {
-            path: CategoriesEnum.Trending,
-            data: {
-              categoryType: CategoriesEnum.Trending
-            },
-            loadChildren: () => import('../category/category.module').then(u => u.CategoryModule)
-          },
-          {
-            path: CategoriesEnum.Popular,
-            data: {
-              categoryType: CategoriesEnum.Popular
-            },
-            loadChildren: () => import('../category/category.module').then(u => u.CategoryModule)
-          },
-          {
-            path: CategoriesEnum.TopRated,
-            data: {
-              categoryType: CategoriesEnum.TopRated
-            },
-            loadChildren: () => import('../category/category.module').then(u => u.CategoryModule)
-          },
-          {
-            path: CategoriesEnum.CurrentlyAiring,
-            data: {
-              categoryType: CategoriesEnum.CurrentlyAiring
-            },
-            loadChildren: () => import('../category/category.module').then(u => u.CategoryModule)
-          },
-          {
-            path: CategoriesEnum.AiringToday,
-            data: {
-              categoryType: CategoriesEnum.AiringToday
-            },
-            loadChildren: () => import('../category/category.module').then(u => u.CategoryModule)
+            path: ':categoryType',
+            loadChildren: () => import('../categories/tv-show-category/tv-show-category.module').then(u => u.TvShowCategoryModule)
           }
         ]
       }
