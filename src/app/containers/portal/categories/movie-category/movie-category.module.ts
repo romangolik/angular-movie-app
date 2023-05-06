@@ -9,7 +9,6 @@ import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.mo
 import { MovieCategoryRouting } from './movie-category.routing';
 
 import { MovieCategoryComponent } from './movie-category.component';
-import { CategoriesService } from '@core/services/categories/categories.service';
 
 @NgModule({
   imports: [
@@ -21,6 +20,6 @@ import { CategoriesService } from '@core/services/categories/categories.service'
   ],
   declarations: [ MovieCategoryComponent ],
   exports: [ MovieCategoryComponent ],
-  providers: [ MoviesService, CategoriesService ]
+  providers: [ MoviesService ]
 })
 export class MovieCategoryModule { }

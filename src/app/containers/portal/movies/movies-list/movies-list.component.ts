@@ -6,7 +6,7 @@ import { MoviesListFacade } from './movies-list.facade';
 
 import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
 
-import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
+import { CategoriesEnum } from '@core/enums/categories.enum';
 
 @Component({
   selector: 'app-movies-list',

@@ -8,7 +8,7 @@ import { HttpService } from '@core/http/http.service';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 import { ShortTvShowDto } from './_types/short-tv-show.dto';
 
-import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
+import { CategoriesEnum } from '@core/enums/categories.enum';
 
 @Injectable()
 export class TvShowsService {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
-import { CategoriesService } from '@core/services/categories/categories.service';
 
 import { MediaCardModule } from '@components/shared/media-card/media-card.module';
 import { MediaListModule } from '@components/shared/media-list/media-list.module';
@@ -21,9 +20,6 @@ import { TvShowCategoryComponent } from './tv-show-category.component';
   ],
   declarations: [ TvShowCategoryComponent ],
   exports: [ TvShowCategoryComponent ],
-  providers: [ 
-    TvShowsService,
-    CategoriesService 
-  ]
+  providers: [ TvShowsService ]
 })
 export class TvShowCategoryModule { }
