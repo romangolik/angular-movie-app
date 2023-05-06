@@ -6,16 +6,21 @@ import {
   Component, 
   ViewChild,
   OnDestroy,
+  QueryList,
   ElementRef, 
   EventEmitter, 
+  ContentChildren,
   ChangeDetectionStrategy,
+  AfterContentInit,
 } from '@angular/core';
+
+import { take } from 'rxjs';
 
 import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
 import { ShortPersonDto } from '@rest/persons/_type/short-person.dto';
 import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
-type MediaType = ShortMovieDto | ShortTvShowDto | ShortPersonDto;
+import { MediaListItemComponent } from './media-list-item/media-list-item.component';
 
 @Component({
   selector: 'app-media-list',
@@ -23,15 +28,15 @@ type MediaType = ShortMovieDto | ShortTvShowDto | ShortPersonDto;
   styleUrls: ['./media-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MediaListComponent implements OnDestroy {
+export class MediaListComponent implements AfterContentInit, OnDestroy {
   @ViewChild('listLoadTrigger')
   set listLoadTrigger(value: ElementRef) {
     if (value && this._canLoadMore) {
       this.initIntersectionObserver(value);
     }
   }
+  @ContentChildren(MediaListItemComponent) listItems: QueryList<MediaListItemComponent>;
 
-  @Input() data: MediaType[];
   @Input() positionToLoad = '500px';
   @Input()
   set canLoadMore(value: boolean) {
@@ -56,8 +61,10 @@ export class MediaListComponent implements OnDestroy {
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  identify(index: number, item: MediaType): number {
-    return item.id;
+  ngAfterContentInit(): void {
+    this.listItems.changes
+      .pipe(take(1))
+      .subscribe(() => this.previewCards = []);
   }
 
   initIntersectionObserver(target: ElementRef): void {

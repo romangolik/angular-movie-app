@@ -1,50 +1,13 @@
 <ul
   #list
   class="media-list">
-  <ng-container *ngIf="data; else previewCardsTemplate">
-    <li
-      *ngFor="let item of data; trackBy: identify"
-      class="media-list__item">
-      <ng-container *ngIf="item | instanceof: ShortMovieDto as item">
-        <app-media-card  
-          [voteAverage]="item.vote_average"
-          [routerLink]="[item.media_type, item.id]"
-          [showWatchNowButton]="true">
-          <img 
-            appMediaCardImage 
-            [alt]="item.title"
-            [src]="item.poster_path | getImageLink : 'w780'" >
-          <h4 appMediaCardHeading>{{ item.title }}</h4>
-        </app-media-card>
-      </ng-container>
-      <ng-container *ngIf="item | instanceof: ShortTvShowDto as item">
-        <app-media-card  
-          [voteAverage]="item.vote_average"
-          [routerLink]="[item.media_type, item.id]"
-          [showWatchNowButton]="true">
-          <img 
-            appMediaCardImage 
-            [alt]="item.name"
-            [src]="item.poster_path | getImageLink : 'w780'" >
-          <h4 appMediaCardHeading>{{ item.name }}</h4>
-        </app-media-card>
-      </ng-container>
-    </li>
-    <div 
-      #listLoadTrigger
-      [ngStyle]="{'height': positionToLoad}"
-      class="media-list__load-trigger"></div>
-  </ng-container>
-  <ng-template #previewCardsTemplate>
-    <li
-      *ngFor="let item of previewCards" 
-      class="card card_preview listing__preview-card media-list__item">
-      <div class="card__info">
-        <span class="card__preview-item card__rating"></span>
-        <span class="card__preview-item card__title"></span>
-      </div>
-    </li>
-  </ng-template>
+  <ng-content select="app-media-list-item"></ng-content>
+  <li *ngFor="let item of previewCards" class="card card_preview listing__preview-card media-list__item">
+    <div class="card__info">
+      <span class="card__preview-item card__rating"></span>
+      <span class="card__preview-item card__title"></span>
+    </div>
+  </li>
 </ul>
 <div 
   *ngIf="canLoadMore" 

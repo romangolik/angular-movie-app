@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MediaCardModule } from '../media-card/media-card.module';
+import { InstanceofModule } from '@core/pipes/instanceof/instanceof.module';
+import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
 import { MediaListComponent } from './media-list.component';
-
-import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
-import { InstanceofModule } from '@core/pipes/instanceof/instanceof.module';
+import { MediaListItemComponent } from './media-list-item/media-list-item.component';
 
 @NgModule({
   imports: [ 
@@ -15,7 +15,13 @@ import { InstanceofModule } from '@core/pipes/instanceof/instanceof.module';
     InstanceofModule,
     GetImageLinkModule,
   ],
-  declarations: [ MediaListComponent ],
-  exports: [ MediaListComponent ]
+  declarations: [ 
+    MediaListComponent, 
+    MediaListItemComponent 
+  ],
+  exports: [ 
+    MediaListComponent,
+    MediaListItemComponent
+  ]
 })
 export class MediaListModule { }
