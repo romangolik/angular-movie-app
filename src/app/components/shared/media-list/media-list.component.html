@@ -2,11 +2,10 @@
   #list
   class="media-list">
   <ng-content select="app-media-list-item"></ng-content>
-  <li *ngFor="let item of previewCards" class="card card_preview listing__preview-card media-list__item">
-    <div class="card__info">
-      <span class="card__preview-item card__rating"></span>
-      <span class="card__preview-item card__title"></span>
-    </div>
+  <li 
+    *ngFor="let item of previewCards" 
+    class="listing__list-item media-list__item">
+    <app-skeleton-card></app-skeleton-card>
   </li>
   <div 
     #listLoadTrigger

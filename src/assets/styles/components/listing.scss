@@ -9,14 +9,7 @@
     color: var(--white);
   }
 
-  &__preview-card {
-    width: 292px;
-
-    aspect-ratio: 73/110;
-    background-color: var(--dark-gray);
-  }
-
-  &__carousel-item {
+  &__list-item {
     width: 292px;
 
     aspect-ratio: 73/110;

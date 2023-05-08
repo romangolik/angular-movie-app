@@ -93,50 +93,6 @@
       transform: scale(0.92);
     }
   }
-
-  &__preview-item {
-    position: relative;
-
-    width: 100%;
-
-    overflow: hidden;
-    border-radius: 4px;
-    background-color: #424242;
-
-    &::after {
-      content: '';
-
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      width: 50%;
-      height: 100%;
-
-      background: linear-gradient(
-        90deg,
-        transparent,
-        #838383,
-        transparent
-      );
-
-      animation: loading 1.4s infinite;
-    }
-  }
-
-  &_preview {
-    &::before {
-      display: none;
-    }
-
-    .card__rating {
-      height: 16px;
-    }
-
-    .card__title {
-      height: 30px;
-    }
-  }
 }
 
 @keyframes loading {

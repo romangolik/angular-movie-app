@@ -5,7 +5,6 @@ import {
   ViewChild,
   QueryList,
   ElementRef,
-  TemplateRef,
   ContentChildren,
   AfterContentInit,
   ViewEncapsulation,
@@ -32,13 +31,11 @@ export class CarouselComponent implements AfterContentInit, OnDestroy {
     if (value) {
       this.carouselNativeElement = value.nativeElement;
       this.carouselWidth = value.nativeElement.clientWidth;
-      this.previewCards = [];
     }
   }
   @ContentChildren(CarouselItemComponent, { read: ElementRef }) carouselItems: QueryList<ElementRef>;
 
   @Input() gap: number;
-  @Input() previewCardTemplate: TemplateRef<any>;
 
   carouselWidth: number;
   itemsPositions: number[];
@@ -58,9 +55,14 @@ export class CarouselComponent implements AfterContentInit, OnDestroy {
     this.carouselItems.changes
       .pipe(take(1))
       .subscribe(queryList => {
+        this.previewCards = [];
+        this.cdr.markForCheck();
+
         this.carouselItemWidth = queryList.first.nativeElement.clientWidth;
+
         this.itemsPositions = this.calculateItemsPositions(queryList.toArray());
         this.visibleItemsCount = this.calculateVisibleElementsCount();
+
         this.initIntersectionObserver(queryList.toArray());
       });
   }
