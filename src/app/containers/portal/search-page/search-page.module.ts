@@ -1,27 +1,35 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { SearchService } from '@rest/search/search.service';
+import { QueryParamsService } from '@core/services/query/query-params.service';
 
-import { SearchPageRouting } from './search-page.routing';
-
-import { SearchPageComponent } from './search-page.component';
-import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 import { MediaCardModule } from '@components/shared/media-card/media-card.module';
 import { MediaListModule } from '@components/shared/media-list/media-list.module';
 import { InstanceofModule } from '@core/pipes/instanceof/instanceof.module';
+import { DirectivesModule } from '@core/directives/directives.module';
+import { SearchPageRouting } from './search-page.routing';
+import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
+
+import { SearchPageComponent } from './search-page.component';
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
-    GetImageLinkModule,
     MediaListModule,
     MediaCardModule,
-    SearchPageRouting,
     InstanceofModule,
+    DirectivesModule,
+    SearchPageRouting,
+    GetImageLinkModule,
   ],
   declarations: [ SearchPageComponent ],
   exports: [ SearchPageComponent ],
-  providers: [ SearchService ]
+  providers: [ 
+    SearchService,
+    QueryParamsService
+  ]
 })
 export class SearchPageModule { }

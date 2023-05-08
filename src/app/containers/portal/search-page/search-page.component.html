@@ -1,11 +1,27 @@
-<div class="catehory-page">
+<div class="search-page">
+  <header class="search-page__header">
+    <div class="search-field">
+      <input
+        id="search"
+        class="search-field__input" 
+        type="text"
+        name="search"
+        autocomplete="off"
+        placeholder="Search for a movie, tv show or person..."
+        [ngModel]="searchValue"
+        (appDebouncedChange)="setSearchValue($event)">
+      <button 
+        class="search-field__button"
+        (click)="resetSearch()">
+        <svg class="search-field__button-icon"><use xlink:href="assets/icons/sprite.svg#cancel-icon"></use></svg>
+      </button>
+    </div>
+  </header>
   <section class="listing">
-    <header class="listing__header">
-      <p class="listing__title large-text">Results For: das</p>
-    </header>
     <div class="listing__content">
       <app-media-list 
-        [canLoadMore]="canLoadMore">
+        [canLoadMore]="canLoadMore"
+        (loadMoreAction)="loadMore()">
         <app-media-list-item *ngFor="let item of data; trackBy:trackBy">
           <ng-container *ngIf="item | instanceof: ShortMovieDto as item">
             <app-media-card  

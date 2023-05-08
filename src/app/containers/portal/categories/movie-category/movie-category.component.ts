@@ -33,7 +33,7 @@ export class MovieCategoryComponent extends BaseCategoryComponent<ShortMovieDto>
 
     this.activatedRoute.params
       .pipe(
-        takeUntil(this.$destroy),
+        takeUntil(this.destroy$),
         switchMap(({categoryType}) => this.moviesService.getDataByCategory(categoryType))
       )
       .subscribe(data => {
@@ -52,7 +52,7 @@ export class MovieCategoryComponent extends BaseCategoryComponent<ShortMovieDto>
       this.categoryType,
       params
     )
-      .pipe(takeUntil(this.$destroy))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.categoryData = data;
         this.mediaList = this.mediaList.concat(data.results);

@@ -29,24 +29,18 @@ import { MediaListItemComponent } from './media-list-item/media-list-item.compon
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaListComponent implements AfterContentInit, OnDestroy {
-  @ViewChild('listLoadTrigger') listLoadTrigger: ElementRef;
+  @ViewChild('listLoadTrigger')
+  set listLoadTrigger(value: ElementRef) {
+    if (value) {
+      this.initIntersectionObserver(value);
+    }
+  }
   @ContentChildren(MediaListItemComponent) listItems: QueryList<MediaListItemComponent>;
 
   @Input() positionToLoad = '500px';
-  @Input()
-  set canLoadMore(value: boolean) {
-    this._canLoadMore = value;
-    if (value === false) {
-      this.disconnectObserver();
-    }
-  }
-  get canLoadMore(): boolean {
-    return this._canLoadMore;
-  }
+  @Input() canLoadMore: boolean;
 
   @Output() loadMoreAction = new EventEmitter<void>();
-
-  private _canLoadMore: boolean;
 
   intersectionObserver: IntersectionObserver;
 
@@ -63,9 +57,6 @@ export class MediaListComponent implements AfterContentInit, OnDestroy {
     this.listItems.changes
       .pipe(take(1))
       .subscribe(() => {
-        if (this.listLoadTrigger && this.canLoadMore) {
-          this.initIntersectionObserver(this.listLoadTrigger);
-        }
         this.previewCards = [];
         this.cdr.markForCheck();
       });
@@ -79,7 +70,7 @@ export class MediaListComponent implements AfterContentInit, OnDestroy {
     };
 
     this.intersectionObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
+      if (entries[0].isIntersecting && this.canLoadMore) {
         this.loadMoreAction.emit();
       }
     }, options);

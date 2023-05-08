@@ -13,7 +13,7 @@ import { CategoriesEnum } from '@core/enums/categories.enum';
   template: '',
 })
 export abstract class BaseCategoryComponent<T extends { id: number }> implements OnInit, OnDestroy {
-  $destroy = new Subject<void>();
+  destroy$ = new Subject<void>();
 
   title = '';
   canLoadMore = false;
@@ -42,7 +42,7 @@ export abstract class BaseCategoryComponent<T extends { id: number }> implements
   }
 
   ngOnDestroy(): void {
-    this.$destroy.next();
-    this.$destroy.complete();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

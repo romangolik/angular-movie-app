@@ -33,7 +33,7 @@ export class TvShowCategoryComponent extends BaseCategoryComponent<ShortTvShowDt
 
     this.activatedRoute.params
       .pipe(
-        takeUntil(this.$destroy),
+        takeUntil(this.destroy$),
         switchMap(({categoryType}) => this.tvShowsService.getDataByCategory(categoryType))
       )
       .subscribe(data => {
@@ -52,7 +52,7 @@ export class TvShowCategoryComponent extends BaseCategoryComponent<ShortTvShowDt
       this.categoryType,
       params
     )
-      .pipe(takeUntil(this.$destroy))
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.categoryData = data;
         this.mediaList = this.mediaList.concat(data.results);
