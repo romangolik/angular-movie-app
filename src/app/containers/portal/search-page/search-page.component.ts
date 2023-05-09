@@ -26,6 +26,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   searchValue = '';
   canLoadMore = true;
+  isSearchResultEmpty = false;
 
   ShortMovieDto = ShortMovieDto;
   ShortTvShowDto = ShortTvShowDto;
@@ -46,6 +47,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe(pagebleData => {
+        this.isSearchResultEmpty = this.searchPageFacade.isSearchResultEmpty;
         this.data = pagebleData.results;
         this.setCurrentData(pagebleData);
       });
