@@ -58,7 +58,6 @@ export class HttpService extends HttpClient {
     // eslint-disable-next-line @typescript-eslint/ban-types
     converHandler?: Function
   ): Observable<PagebleDto<T>> {
-
     if (!converHandler) {
       return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
         .pipe(
@@ -66,7 +65,7 @@ export class HttpService extends HttpClient {
         );
     }
 
-    if (converHandler.name) {
+    if (converHandler.prototype?.constructor) {
       return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
         .pipe(
           map(response => new PagebleDto({ ...response, DtoClass: converHandler as Constructor<T> }))

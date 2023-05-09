@@ -37,8 +37,8 @@ export class MediaListComponent implements AfterContentInit, OnDestroy {
   }
   @ContentChildren(MediaListItemComponent) listItems: QueryList<MediaListItemComponent>;
 
-  @Input() positionToLoad = '500px';
   @Input() canLoadMore: boolean;
+  @Input() positionToLoad = '500px';
 
   @Output() loadMoreAction = new EventEmitter<void>();
 

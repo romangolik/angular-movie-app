@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { SearchService } from '@rest/search/search.service';
+import { SearchPageFacade } from './search-page.facade';
 import { QueryParamsService } from '@core/services/query/query-params.service';
 
 import { MediaCardModule } from '@components/shared/media-card/media-card.module';
@@ -29,6 +30,7 @@ import { SearchPageComponent } from './search-page.component';
   exports: [ SearchPageComponent ],
   providers: [ 
     SearchService,
+    SearchPageFacade,
     QueryParamsService
   ]
 })

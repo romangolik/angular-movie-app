@@ -14,28 +14,37 @@ import { SearchResult } from '@portal/search-page/_types/search-result.type';
 
 import { MediaTypesEnum } from '@core/enums/media-types.enum';
 
-
 @Injectable()
 export class SearchService {
   constructor(private http: HttpService) {}
+
+  private parseDataToDtoClass(item: SearchResult): SearchResult {
+    switch (item.media_type) {
+      case MediaTypesEnum.MOVIE:
+        return new ShortMovieDto(item);
+        break;
+      case MediaTypesEnum.TV:
+        return new ShortTvShowDto(item);
+        break;
+      case MediaTypesEnum.PERSON:
+        return new ShortPersonDto(item);
+        break;
+    }
+  }
 
   search(params?: Params): Observable<PagebleDto<SearchResult>> {
     return this.http.getAllWithPagination<SearchResult>(
       'api/search/multi',
       params,
-      item => {
-        switch (item.media_type) {
-          case MediaTypesEnum.MOVIE:
-            return new ShortMovieDto(item);
-            break;
-          case MediaTypesEnum.TV:
-            return new ShortTvShowDto(item);
-            break;
-          case MediaTypesEnum.PERSON:
-            return new ShortPersonDto(item);
-            break;
-        }
-      }
+      this.parseDataToDtoClass
+    );
+  }
+
+  trending(params?: Params): Observable<PagebleDto<SearchResult>> {
+    return this.http.getAllWithPagination<SearchResult>(
+      'api/trending/all/week',
+      params,
+      this.parseDataToDtoClass
     );
   }
 }

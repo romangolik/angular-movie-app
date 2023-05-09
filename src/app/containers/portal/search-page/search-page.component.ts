@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subject, switchMap, takeUntil } from 'rxjs';
 
-import { SearchService } from '@rest/search/search.service';
+import { SearchPageFacade } from './search-page.facade';
 import { QueryParamsService } from '@core/services/query/query-params.service';
 
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
@@ -26,31 +26,38 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   searchValue = '';
   canLoadMore = true;
+
   ShortMovieDto = ShortMovieDto;
   ShortTvShowDto = ShortTvShowDto;
   ShortPersonDto = ShortPersonDto;
 
   constructor(
-    private searchService: SearchService,
+    public searchPageFacade: SearchPageFacade,
     private activatedRoute: ActivatedRoute,
     private queryParamsService: QueryParamsService,
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams
-      .pipe(switchMap(params => {
-        this.searchValue = params.query ?? '';
-        return this.searchService.search(params);
-      }))
+      .pipe(
+        switchMap(params => {
+          this.searchValue = params.query ?? '';
+          return this.searchPageFacade.search(params);
+        }),
+      )
       .subscribe(pagebleData => {
-        this.pagebleData = pagebleData;
         this.data = pagebleData.results;
-        this.canLoadMore = pagebleData.page !== pagebleData.total_pages;
+        this.setCurrentData(pagebleData);
       });
   }
 
   trackBy(index: number, item: SearchResult): number {
     return item.id || index;
+  }
+
+  setCurrentData(pagebleData: PagebleDto<SearchResult>): void {
+    this.pagebleData = pagebleData;
+    this.canLoadMore = pagebleData.page !== pagebleData.total_pages;
   }
 
   setSearchValue(value: string): void {
@@ -64,16 +71,15 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   loadMore(): void {
     const params = {
-      query: this.searchValue,
-      page: this.pagebleData.page + 1
+      page: this.pagebleData.page + 1,
+      query: this.searchValue
     };
 
-    this.searchService.search(params)
+    this.searchPageFacade.search(params)
       .pipe(takeUntil(this.destroy$))
       .subscribe(pagebleData => {
-        this.pagebleData = pagebleData;
         this.data = this.data.concat(pagebleData.results);
-        this.canLoadMore = pagebleData.page !== pagebleData.total_pages;
+        this.setCurrentData(pagebleData);
       });
   }
 
