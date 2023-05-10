@@ -4,9 +4,9 @@ import { Observable, take } from 'rxjs';
 
 import { MoviesListFacade } from './movies-list.facade';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
 
-import { CategoriesEnum } from '@core/services/categories/_data/categories.enum';
+import { CategoriesEnum } from '@core/enums/categories.enum';
 
 @Component({
   selector: 'app-movies-list',
@@ -14,11 +14,11 @@ import { CategoriesEnum } from '@core/services/categories/_data/categories.enum'
   styleUrls: ['./movies-list.component.scss']
 })
 export class MoviesListComponent implements OnInit {
-  $sliderItems: Observable<MediaDto[]>;
-  $popularMovies: Observable<MediaDto[]>;
-  $topRatedMovies: Observable<MediaDto[]>;
-  $upcomingMovies: Observable<MediaDto[]>;
-  $nowPlayingMovies: Observable<MediaDto[]>;
+  $sliderItems: Observable<ShortMovieDto[]>;
+  $popular: Observable<ShortMovieDto[]>;
+  $topRated: Observable<ShortMovieDto[]>;
+  $upcoming: Observable<ShortMovieDto[]>;
+  $nowPlaying: Observable<ShortMovieDto[]>;
 
   categoriesEnum = CategoriesEnum;
 
@@ -26,9 +26,9 @@ export class MoviesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.$sliderItems = this.facade.getTrending().pipe(take(5));
-    this.$popularMovies = this.facade.getPopular();
-    this.$topRatedMovies = this.facade.getTopRated();
-    this.$upcomingMovies = this.facade.getUpcoming();
-    this.$nowPlayingMovies = this.facade.getNowPlaying();
+    this.$popular = this.facade.getPopular();
+    this.$topRated = this.facade.getTopRated();
+    this.$upcoming = this.facade.getUpcoming();
+    this.$nowPlaying = this.facade.getNowPlaying();
   }
 }

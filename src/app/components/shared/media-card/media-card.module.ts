@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { GetImageLinkModule } from '@core/pipes/get-image-link/get-image-link.module';
 
 import { MediaCardComponent } from './media-card.component';
+import { MediaCardHeading, MediaCardImage, MediaCardParagraph } from './directives/media-card-sections.directive';
 
 @NgModule({
   imports: [
@@ -12,7 +13,17 @@ import { MediaCardComponent } from './media-card.component';
     RouterModule,
     GetImageLinkModule
   ],
-  declarations: [ MediaCardComponent ],
-  exports: [ MediaCardComponent ]
+  declarations: [ 
+    MediaCardImage,
+    MediaCardHeading,
+    MediaCardParagraph,
+    MediaCardComponent,
+  ],
+  exports: [ 
+    MediaCardImage,
+    MediaCardHeading,
+    MediaCardParagraph,
+    MediaCardComponent,
+  ]
 })
 export class MediaCardModule { }

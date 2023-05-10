@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, Input } from '@angular/core';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { MediaCardImage } from './directives/media-card-sections.directive';
 
 @Component({
   selector: 'app-media-card',
@@ -9,11 +9,33 @@ import { MediaDto } from '@rest/media/_types/media.dto';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaCardComponent {
-  @Input() data: MediaDto;
+  @Input() routerLink: string | any[];
+  @Input() voteAverage: number;
+  @Input() showWatchNowButton = false;
 
+  @ContentChild(MediaCardImage, {descendants: true})
+  set image(value: MediaCardImage) {
+    if (value) {
+      const nativeElement = value._elementRef.nativeElement;
+
+      this.hasImageSrc = !nativeElement.src.includes('default');
+
+      if (this.hasImageSrc) {
+        value.loaded$
+          .subscribe(() => this.imageLoaded());
+      } else {
+        this.imageLoaded();
+      }
+    }
+  }
+
+  hasImageSrc = true;
   isImageLoaded = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   imageLoaded(): void {
     this.isImageLoaded = true;
+    this.cdr.markForCheck();
   }
 }

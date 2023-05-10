@@ -7,7 +7,7 @@ import { HttpService } from '@core/http/http.service';
 
 import { GenreDto } from '@rest/genres/_types/genre.dto';
 
-import { MediaTypesEnum } from '@rest/media/_types/media-types.enum';
+import { MediaTypesEnum } from '@core/enums/media-types.enum';
 import { GenresStorageKeysEnum } from './_data/genres-storage-keys.enum';
 
 @Injectable()

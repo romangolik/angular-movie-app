@@ -1,0 +1,69 @@
+<div class="search-page">
+  <header class="search-page__header">
+    <div class="search-field">
+      <input
+        id="search"
+        class="search-field__input" 
+        type="text"
+        name="search"
+        autocomplete="off"
+        placeholder="Search for a movie, tv show or person..."
+        [ngModel]="searchValue"
+        (appDebouncedChange)="setSearchValue($event)">
+      <button 
+        class="search-field__button"
+        (click)="resetSearch()">
+        <svg class="search-field__button-icon"><use xlink:href="assets/icons/sprite.svg#cancel-icon"></use></svg>
+      </button>
+    </div>
+  </header>
+  <section class="listing">
+    <ng-container *ngIf="isSearchResultEmpty">
+      <p class="search-page__not-found increased-text">There is no data matching the request.</p>
+      <header class="listing__header">
+        <p class="listing__title large-text">Trending Movies, TV Shows, Presons</p>
+      </header>
+    </ng-container>
+    <div class="listing__content">
+      <app-media-list 
+        [canLoadMore]="canLoadMore"
+        (loadMoreAction)="loadMore()">
+        <app-media-list-item *ngFor="let item of data; trackBy:trackBy">
+          <ng-container *ngIf="item | instanceof: ShortMovieDto as item">
+            <app-media-card  
+              [voteAverage]="item.vote_average"
+              [routerLink]="[item.media_type, item.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="item.title"
+                [src]="item.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ item.title }}</h4>
+            </app-media-card>
+          </ng-container>
+          <ng-container *ngIf="item | instanceof: ShortTvShowDto as item">
+            <app-media-card  
+              [voteAverage]="item.vote_average"
+              [routerLink]="[item.media_type, item.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="item.name"
+                [src]="item.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ item.name }}</h4>
+            </app-media-card>
+          </ng-container>
+          <ng-container *ngIf="item | instanceof: ShortPersonDto as item">
+            <app-media-card [routerLink]="[item.media_type, item.id]">
+              <img 
+                appMediaCardImage 
+                [alt]="item.name"
+                [src]="item.profile_path| getImageLink : 'h632'" >
+              <h4 appMediaCardHeading>{{ item.name }}</h4>
+            </app-media-card>
+          </ng-container>
+        </app-media-list-item>
+      </app-media-list>
+    </div>
+  </section>
+</div>

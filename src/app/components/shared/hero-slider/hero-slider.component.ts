@@ -17,7 +17,10 @@ import {
   BehaviorSubject,
 } from 'rxjs';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
+
+type MediaType = ShortMovieDto | ShortTvShowDto;
 
 @Component({
   selector: 'app-hero-slider',
@@ -37,18 +40,18 @@ export class HeroSliderComponent implements OnInit, OnDestroy {
   }
 
   @Input() 
-  set data(value: MediaDto[]) {
+  set data(value: MediaType[]) {
     if (value && value.length) {
       this._data = value;
       this.setIndexes(this.activeSlide);
     }
   }
-  get data(): MediaDto[] {
+  get data(): MediaType[] {
     return this._data;
   }
   @Input() interval = 5000;
 
-  private _data: MediaDto[];
+  private _data: MediaType[];
   private destroy$ = new Subject<void>();
   private playing = new BehaviorSubject(true);
 

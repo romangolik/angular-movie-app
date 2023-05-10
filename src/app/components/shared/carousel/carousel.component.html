@@ -9,12 +9,12 @@
     #carousel
     [ngStyle]="gap ? {'grid-gap.px': gap} : {}"
     class="carousel__content">
+    <li 
+      *ngFor="let item of previewCards" 
+      class="listing__list-item">
+      <app-skeleton-card></app-skeleton-card>
+    </li>
     <ng-content select="app-carousel-item"></ng-content>
-    <ng-container *ngIf="previewCards">
-      <ng-container
-        *ngFor="let item of previewCards"
-        [ngTemplateOutlet]="previewCardTemplate"></ng-container>
-    </ng-container>
   </ul>
   <button 
     class="carousel__button carousel__button_next"

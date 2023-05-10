@@ -8,7 +8,8 @@ import { MoviesService } from '@rest/movies/movies.service';
 import { GenresService } from '@rest/genres/genres.service';
 import { TvShowsService } from '@rest/tv-shows/tv-shows.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
+import { ShortMovieDto } from '@rest/movies/_types/short-movie.dto';
+import { ShortTvShowDto } from '@rest/tv-shows/_types/short-tv-show.dto';
 
 @Injectable()
 export class HomeFacade {
@@ -18,7 +19,7 @@ export class HomeFacade {
     private tvShowsService: TvShowsService
   ) {}
 
-  getTrendingMovies(params?: Params): Observable<MediaDto[]> {
+  getTrendingMovies(params?: Params): Observable<ShortMovieDto[]> {
     return this.moviesService.getTrending({
       'language': 'en-US',
       'page': '1',
@@ -27,7 +28,7 @@ export class HomeFacade {
       map(data => data.results),
       switchMap(
         movies => this.genresService.getMovieList().pipe(
-          map(allGenres => movies.map(movie => ({
+          map(allGenres => movies.map(movie => new ShortMovieDto({
             ...movie,
             genres: this.genresService.getByIds(movie.genre_ids, allGenres)
           })))
@@ -36,7 +37,7 @@ export class HomeFacade {
     );
   }
 
-  getTrendingTvShows(params?: Params): Observable<MediaDto[]> {
+  getTrendingTvShows(params?: Params): Observable<ShortTvShowDto[]> {
     return this.tvShowsService.getTrending({
       'language': 'en-US',
       'page': '1',

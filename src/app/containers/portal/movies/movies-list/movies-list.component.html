@@ -14,13 +14,20 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel 
-          [gap]="16"
-          [previewCardTemplate]="previewCard">
+        <app-carousel [gap]="16">
           <app-carousel-item 
-            *ngFor="let movie of $popularMovies | async"
-            class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
+            *ngFor="let movie of $popular | async"
+            class="listing__list-item">
+            <app-media-card  
+              [voteAverage]="movie.vote_average"
+              [routerLink]="[movie.media_type, movie.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="movie.title"
+                [src]="movie.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ movie.title }}</h4>
+            </app-media-card>
           </app-carousel-item>
         </app-carousel>
       </div>
@@ -36,13 +43,20 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel 
-          [gap]="16"
-          [previewCardTemplate]="previewCard">
+        <app-carousel [gap]="16">
           <app-carousel-item 
-            *ngFor="let movie of $topRatedMovies | async"
-            class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
+            *ngFor="let movie of $topRated | async"
+            class="listing__list-item">
+            <app-media-card  
+              [voteAverage]="movie.vote_average"
+              [routerLink]="[movie.media_type, movie.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="movie.title"
+                [src]="movie.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ movie.title }}</h4>
+            </app-media-card>
           </app-carousel-item>
         </app-carousel>
       </div>
@@ -58,13 +72,20 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel 
-          [gap]="16"
-          [previewCardTemplate]="previewCard">
+        <app-carousel [gap]="16">
           <app-carousel-item 
-            *ngFor="let movie of $upcomingMovies | async"
-            class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
+            *ngFor="let movie of $upcoming | async"
+            class="listing__list-item">
+            <app-media-card  
+              [voteAverage]="movie.vote_average"
+              [routerLink]="[movie.media_type, movie.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="movie.title"
+                [src]="movie.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ movie.title }}</h4>
+            </app-media-card>
           </app-carousel-item>
         </app-carousel>
       </div>
@@ -80,24 +101,23 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel 
-          [gap]="16"
-          [previewCardTemplate]="previewCard">
+        <app-carousel [gap]="16">
           <app-carousel-item 
-            *ngFor="let movie of $nowPlayingMovies | async"
-            class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
+            *ngFor="let movie of $nowPlaying | async"
+            class="listing__list-item">
+            <app-media-card  
+              [voteAverage]="movie.vote_average"
+              [routerLink]="[movie.media_type, movie.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage 
+                [alt]="movie.title"
+                [src]="movie.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ movie.title }}</h4>
+            </app-media-card>
           </app-carousel-item>
         </app-carousel>
       </div>
     </section>
   </div>
 </div>
-<ng-template #previewCard>
-  <li class="card card_preview listing__preview-card">
-    <div class="card__info">
-      <span class="card__preview-item card__rating"></span>
-      <span class="card__preview-item card__title"></span>
-    </div>
-  </li>
-</ng-template>

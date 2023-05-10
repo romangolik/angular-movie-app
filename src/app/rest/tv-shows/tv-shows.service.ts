@@ -5,8 +5,10 @@ import { Observable } from 'rxjs';
 
 import { HttpService } from '@core/http/http.service';
 
-import { MediaDto } from '@rest/media/_types/media.dto';
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
+import { ShortTvShowDto } from './_types/short-tv-show.dto';
+
+import { CategoriesEnum } from '@core/enums/categories.enum';
 
 @Injectable()
 export class TvShowsService {
@@ -14,43 +16,39 @@ export class TvShowsService {
 
   constructor(private http: HttpService) { }
 
-  getTrending(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
-      'api/trending/tv/week',
+  getDataByCategory(category: CategoriesEnum, params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    const ENDPOINTS = {
+      [CategoriesEnum.Trending]: 'api/trending/tv/week',
+      [CategoriesEnum.Popular]: `${this.path}/popular`,
+      [CategoriesEnum.TopRated]: `${this.path}/top_rated`,
+      [CategoriesEnum.CurrentlyAiring]: `${this.path}/on_the_air`,
+      [CategoriesEnum.AiringToday]: `${this.path}/airing_today`,
+    };
+
+    return this.http.getAllWithPagination<ShortTvShowDto>(
+      ENDPOINTS[category],
       params,
-      MediaDto,
+      ShortTvShowDto
     );
   }
 
-  getPopular(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
-      `${this.path}/popular`,
-      params,
-      MediaDto,
-    );
+  getTrending(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.getDataByCategory(CategoriesEnum.Trending, params);
   }
 
-  getTopRated(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
-      `${this.path}/top_rated`,
-      params,
-      MediaDto,
-    );
+  getPopular(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.getDataByCategory(CategoriesEnum.Popular, params);
   }
 
-  getCurrentlyAiring(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
-      `${this.path}/on_the_air`,
-      params,
-      MediaDto,
-    );
+  getTopRated(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.getDataByCategory(CategoriesEnum.TopRated, params);
   }
 
-  getAiringToday(params?: Params): Observable<PagebleDto<MediaDto>> {
-    return this.http.getAllWithPagination<MediaDto>(
-      `${this.path}/airing_today`,
-      params,
-      MediaDto,
-    );
+  getCurrentlyAiring(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.getDataByCategory(CategoriesEnum.CurrentlyAiring, params);
+  }
+
+  getAiringToday(params?: Params): Observable<PagebleDto<ShortTvShowDto>> {
+    return this.getDataByCategory(CategoriesEnum.AiringToday, params);
   }
 }

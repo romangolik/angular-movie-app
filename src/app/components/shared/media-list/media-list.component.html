@@ -1,27 +1,16 @@
 <ul
   #list
   class="media-list">
-  <ng-container *ngIf="data; else previewCardsTemplate">
-    <li
-      *ngFor="let item of data; trackBy: identify"
-      class="media-list__item">
-      <app-media-card [data]="item"></app-media-card>
-    </li>
-    <div 
-      #listLoadTrigger
-      [ngStyle]="{'height': positionToLoad}"
-      class="media-list__load-trigger"></div>
-  </ng-container>
-  <ng-template #previewCardsTemplate>
-    <li
-      *ngFor="let item of previewCards" 
-      class="card card_preview listing__preview-card media-list__item">
-      <div class="card__info">
-        <span class="card__preview-item card__rating"></span>
-        <span class="card__preview-item card__title"></span>
-      </div>
-    </li>
-  </ng-template>
+  <ng-content select="app-media-list-item"></ng-content>
+  <li 
+    *ngFor="let item of previewCards" 
+    class="listing__list-item media-list__item">
+    <app-skeleton-card></app-skeleton-card>
+  </li>
+  <div 
+    #listLoadTrigger
+    [ngStyle]="{'height': positionToLoad}"
+    class="media-list__load-trigger"></div>
 </ul>
 <div 
   *ngIf="canLoadMore" 

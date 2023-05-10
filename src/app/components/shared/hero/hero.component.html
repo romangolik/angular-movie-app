@@ -4,21 +4,21 @@
   [class.hero_hide-info]="hideInfo">
   <img
     class="hero__image"
-    [alt]="mediaData.title"
-    [src]="mediaData.backdrop_path | getImageLink"
+    [alt]="title"
+    [src]="data.backdrop_path | getImageLink"
     (load)="imageLoadHandler()"/>
   <div class="hero__info">
     <div
       [ngStyle]="{ '--delay': '1s' }"
       class="hero__badges hero__animation-element">
       <span 
-        *ngFor="let genre of mediaData.genres"
+        *ngFor="let genre of data.genres"
         class="badge reduced-text">
         {{genre.name}}
       </span>
     </div>
     <div
-      [ngStyle]="{ '--delay': '1s', '--rating': mediaData.vote_average }"
+      [ngStyle]="{ '--delay': '1s', '--rating': data.vote_average }"
       class="rating hero__rating hero__animation-element">
       <div class="rating__stars">
         <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
@@ -27,22 +27,22 @@
         <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
         <svg><use xlink:href="assets/icons/sprite.svg#star-icon"></use></svg>
       </div>
-      <p class="hero__reviews reduced-text">{{ mediaData.vote_count }} Reviews</p>
+      <p class="hero__reviews reduced-text">{{ data.vote_count }} Reviews</p>
     </div>
     <h1
       [ngStyle]="{ '--delay': '1.1s' }"
       class="hero__title hero__animation-element">
       <a 
         class="hero__title-link"
-        [href]="['/movie/' + mediaData.id]" 
-        [routerLink]="['/movie/' + mediaData.id]">
-        {{ mediaData.title }}
+        [href]="[data.media_type, data.id]" 
+        [routerLink]="[data.media_type, data.id]">
+        {{ title }}
       </a>
     </h1>
     <p
       [ngStyle]="{ '--delay': '1.2s' }"
       class="hero__description hero__animation-element">
-      {{ mediaData.overview }}
+      {{ data.overview }}
     </p>
     <button
       [ngStyle]="{ '--delay': '1.3s' }"

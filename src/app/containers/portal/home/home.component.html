@@ -14,13 +14,20 @@
         </a>
       </header>
       <div class="listing__content">
-        <app-carousel 
-          [gap]="16" 
-          [previewCardTemplate]="previewCard">
+        <app-carousel [gap]="16">
           <app-carousel-item 
             *ngFor="let movie of $trendingMovies | async"
-            class="listing__carousel-item">
-            <app-media-card [data]="movie"></app-media-card>
+            class="listing__list-item">
+            <app-media-card  
+              [voteAverage]="movie.vote_average"
+              [routerLink]="[movie.media_type, movie.id]"
+              [showWatchNowButton]="true">
+              <img 
+                appMediaCardImage
+                [alt]="movie.title"
+                [src]="movie.poster_path | getImageLink : 'w780'" >
+              <h4 appMediaCardHeading>{{ movie.title }}</h4>
+            </app-media-card>
           </app-carousel-item>
         </app-carousel>
       </div>
@@ -35,23 +42,22 @@
           <svg class="link__icon"><use xlink:href="assets/icons/sprite.svg#right-arrow-icon"></use></svg>
         </a>
       </header>
-      <app-carousel 
-        [gap]="16" 
-        [previewCardTemplate]="previewCard">
+      <app-carousel [gap]="16">
         <app-carousel-item 
           *ngFor="let tvShow of $trendingTVShows | async"
-          class="listing__carousel-item">
-          <app-media-card [data]="tvShow"></app-media-card>
+          class="listing__list-item">
+          <app-media-card  
+            [voteAverage]="tvShow.vote_average"
+            [routerLink]="[tvShow.media_type, tvShow.id]"
+            [showWatchNowButton]="true">
+            <img 
+              appMediaCardImage 
+              [alt]="tvShow.name"
+              [src]="tvShow.poster_path | getImageLink : 'w780'" >
+            <h4 appMediaCardHeading>{{ tvShow.name }}</h4>
+          </app-media-card>
         </app-carousel-item>
       </app-carousel>
     </section>
   </section>
 </div>
-<ng-template #previewCard>
-  <li class="card card_preview listing__preview-card">
-    <div class="card__info">
-      <span class="card__preview-item card__rating"></span>
-      <span class="card__preview-item card__title"></span>
-    </div>
-  </li>
-</ng-template>

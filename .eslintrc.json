@@ -37,6 +37,7 @@
             "type": "attribute"
           }
         ],
+        "@angular-eslint/no-host-metadata-property": "off",
         "@typescript-eslint/typedef": "error",
         "@typescript-eslint/array-type": "off",
         "@typescript-eslint/no-namespace": "error",

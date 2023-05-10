@@ -6,10 +6,7 @@
   grid-template-columns: repeat(5, 1fr);
 
   &__item {
-    height: auto;
     width: 100%;
-
-    aspect-ratio: 73/110;
   }
 
   &__load-trigger {

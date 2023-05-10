@@ -15,7 +15,7 @@
       display: none;
     }
 
-    & > app-carousel-item {
+    & > app-carousel-item, .listing__list-item {
       scroll-snap-align: start;
 
       &:first-child {

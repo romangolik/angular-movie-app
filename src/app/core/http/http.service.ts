@@ -11,6 +11,9 @@ import { RequestOptions } from '@core/http/_types/request-options';
 
 import { PagebleDto } from '@core/http/_types/pageble-response.dto';
 
+import { Constructor } from './_types/constructor.type';
+import { CustomFunction } from './_types/function.type';
+
 @Injectable()
 export class HttpService extends HttpClient {
 
@@ -47,14 +50,31 @@ export class HttpService extends HttpClient {
       );
   }
 
+  getAllWithPagination<T>(url: string, params?: Params, DtoClass?: Constructor<T>): Observable<PagebleDto<T>>
+  getAllWithPagination<T>(url: string, params?: Params, converFunction?: CustomFunction<T>): Observable<PagebleDto<T>>
   getAllWithPagination<T>(
     url: string,
     params?: Params,
-    DtoClass?: new (responseItem) => T
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    converHandler?: Function
   ): Observable<PagebleDto<T>> {
+    if (!converHandler) {
+      return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
+        .pipe(
+          map(response => new PagebleDto({ ...response }))
+        );
+    }
+
+    if (converHandler.prototype?.constructor) {
+      return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
+        .pipe(
+          map(response => new PagebleDto({ ...response, DtoClass: converHandler as Constructor<T> }))
+        );
+    }
+
     return super.get<PagebleDto<T>>(url, { params: this.dataParser.parseParams(params) })
       .pipe(
-        map(response => new PagebleDto({ ...response, DtoClass }))
+        map(response => new PagebleDto({ ...response, converFunction: converHandler as CustomFunction<T> }))
       );
   }
 
